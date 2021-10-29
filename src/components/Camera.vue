@@ -51,21 +51,21 @@ export default {
 <style lang="scss" scoped>
 .camera {
     width: 100vw;
-    height: 100vh;
-    padding: 25px;
-    box-sizing: border-box;
+    // height: 100vh;
+    // padding: 25px;
+    // box-sizing: border-box;
     
     
     .feed {
         display: black;
         width: 100%;
-        height: 20%;
+        height: 50%;
         max-width:1280px;
 
-        margin: 0 auto;
+        // margin: 0 auto;
 
-        background-color: #171717;
-        box-shadow: 6px 6px 12px 8px rgba(0, 0, 0, 0.35); 
+        background-color: #ffffff;
+        // box-shadow: 6px 6px 12px 8px rgba(0, 0, 0, 0.35); 
     }
 
     .snap {
