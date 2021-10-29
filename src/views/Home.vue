@@ -25,7 +25,7 @@ export default {
   methods: {
     takePicture(){
       console.log("take picture");
-      let ratio = (window.innerHeight < window.innerWidth) ? 16 / 9 : 9 / 16;  
+      let ratio = (window.innerHeight < window.innerWidth) ? 16 / 11 : 11 / 16;  
       const picture = document.querySelector("canvas");
       picture.width = (window.innerWidth < 1280) ? window.innerWidth : 1280;
       picture.height = window.innerWidth / ratio;
@@ -36,7 +36,7 @@ export default {
 
       const imageFileData = picture.toDataURL('image/jpeg', 1);
       console.log(imageFileData);
-    }
+    },
   },
 
   mounted(){

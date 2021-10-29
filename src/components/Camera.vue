@@ -25,9 +25,9 @@ export default {
                             ideal: 720,
                             max: 1080,
                         },
-                        // facingMode: {
-                        //     exact: 'environment'
-                        // },
+                        facingMode: {
+                            exact: 'environment'
+                        },
                     },
                     
                 }
@@ -74,7 +74,7 @@ export default {
         height: 75px;
         border-radius: 50%;
 
-        margin: 25px auto;
+        margin: 0px auto;
 
         background-color: transparentize($color: #ffce00, $amount: 0.5);
         border: 1px solid #171717;
