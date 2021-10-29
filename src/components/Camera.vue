@@ -22,8 +22,8 @@ export default {
                         },
                         height: {
                             min: 360,
-                            ideal: 720,
-                            max: 1080,
+                            ideal: 360,
+                            max: 360,
                         },
                         // facingMode: {
                         //     exact: 'environment'
