@@ -59,7 +59,7 @@ export default {
     .feed {
         display: black;
         width: 100%;
-        height: 50%;
+        height: 20%;
         max-width:1280px;
 
         margin: 0 auto;
