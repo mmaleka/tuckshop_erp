@@ -16,14 +16,14 @@ export default {
                 let constraints = {
                     video: {
                         width: {
-                            min: 640,
-                            ideal: 1280,
-                            max: 1920,
+                            min: 1500,
+                            ideal: 4000,
+                            max: 4000,
                         },
                         height: {
-                            min: 360,
-                            ideal: 720,
-                            max: 1080,
+                            min: 2000,
+                            ideal: 3000,
+                            max: 3000,
                         },
                         facingMode: {
                             exact: 'environment'
