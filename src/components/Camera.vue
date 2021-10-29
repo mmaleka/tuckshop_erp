@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 .camera {
     width: 100vw;
-    // height: 100vh;
+    height: 80vh;
     // padding: 25px;
     // box-sizing: border-box;
     
