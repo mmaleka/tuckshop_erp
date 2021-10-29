@@ -22,8 +22,8 @@ export default {
                         },
                         height: {
                             min: 360,
-                            ideal: 360,
-                            max: 360,
+                            ideal: 720,
+                            max: 1080,
                         },
                         // facingMode: {
                         //     exact: 'environment'
@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 .camera {
     width: 100vw;
-    height: 100vh;
+    height: 20vh;
     padding: 25px;
     box-sizing: border-box;
     
