@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 .camera {
     width: 100vw;
-    height: 20vh;
+    height: 100vh;
     padding: 25px;
     box-sizing: border-box;
     
@@ -59,6 +59,7 @@ export default {
     .feed {
         display: black;
         width: 100%;
+        height: 50;
         max-width:1280px;
 
         margin: 0 auto;
