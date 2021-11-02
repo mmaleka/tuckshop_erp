@@ -230,11 +230,15 @@ export default new Vuex.Store({
       })
         .then(res_decodebarcodeimage => {
           console.log(res_decodebarcodeimage);
-          Vue.$toast.open("Thank soon", {
-            timeout: 4000
-          });
+          alert('success')
+          // Vue.$toast.open("Thank soon", {
+          //   timeout: 4000
+          // });
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+          console.error(err)
+          alert(err)
+        });
 
     },
 
