@@ -35,7 +35,9 @@ export default {
       ctx.drawImage(document.querySelector("video"), 0, 0, picture.width, picture.height)
 
       const imageFileData = picture.toDataURL('image/jpeg', 1);
-      console.log(imageFileData);
+      // console.log(imageFileData);
+
+      this.$store.dispatch('SendBarcodeImage', { imageFileData })
     },
   },
 

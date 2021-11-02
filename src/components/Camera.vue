@@ -16,19 +16,35 @@ export default {
                 let constraints = {
                     video: {
                         width: {
-                            min: 1500,
-                            ideal: 4000,
-                            max: 4000,
+                            min: 1280,
+                            ideal: 1920,
+                            max: 2560,
                         },
                         height: {
-                            min: 2000,
-                            ideal: 3000,
-                            max: 3000,
+                            min: 720,
+                            ideal: 1080,
+                            max: 1440,
                         },
-                        facingMode: {
-                            exact: 'environment'
-                        },
+                        // facingMode: {
+                        //     exact: 'environment'
+                        // },
                     },
+
+                    // video: {
+                    //     width: {
+                    //         min: 1500,
+                    //         ideal: 4000,
+                    //         max: 4000,
+                    //     },
+                    //     height: {
+                    //         min: 2000,
+                    //         ideal: 3000,
+                    //         max: 3000,
+                    //     },
+                    //     facingMode: {
+                    //         exact: 'environment'
+                    //     },
+                    // },
                     
                 }
 

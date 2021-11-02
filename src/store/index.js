@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '@/router/index.js'
+
 Vue.use(Vuex)
+
 
 
 export default new Vuex.Store({
@@ -14,8 +16,8 @@ export default new Vuex.Store({
     endpoints: {
       obtainJWT: 'api-food_delivery/api/token/',
       refreshJWT: 'api-food_delivery/api/token/refresh/',
-      // baseURL: 'http://127.0.0.1:8000/',
-      baseURL: 'https://try-coding.herokuapp.com/',
+      baseURL: 'http://192.168.43.120:8080/',
+      // baseURL: 'https://try-coding.herokuapp.com/',
     },
     loggedIn: '',
     registered: '',
@@ -178,7 +180,7 @@ export default new Vuex.Store({
       let url_profileUpdate = this.state.endpoints.baseURL + 'api-accounts_profile/accounts_profile/'
       axios.post(url_profileUpdate, {
         user: user_id,
-        tag: "laundry_services"
+        tag: "tucksop go digital"
       })
         .then(res => {
           console.log("res_adding_profile: ", res);
@@ -215,6 +217,25 @@ export default new Vuex.Store({
           console.log(res);
         })
         .catch(err => console.error(err));
+    },
+
+
+    async SendBarcodeImage({ commit }, barcode_data) {
+      console.log("commit: ", commit);
+      // console.log("barcode_data: ", barcode_data.imageFileData);
+
+      const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
+      axios.post(url, {
+        image_bytes: barcode_data.imageFileData,
+      })
+        .then(res_decodebarcodeimage => {
+          console.log(res_decodebarcodeimage);
+          Vue.$toast.open("Thank soon", {
+            timeout: 4000
+          });
+        })
+        .catch(err => console.error(err));
+
     },
 
 

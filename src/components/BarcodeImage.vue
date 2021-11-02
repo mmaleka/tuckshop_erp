@@ -15,7 +15,7 @@ export default {
 
 <style lang="scss" scoped>
 .picture {
-    display: block;
+    display: none;
     width: 100vw;
     height: 100vh;
 
