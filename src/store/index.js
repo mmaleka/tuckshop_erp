@@ -16,8 +16,8 @@ export default new Vuex.Store({
     endpoints: {
       obtainJWT: 'api-food_delivery/api/token/',
       refreshJWT: 'api-food_delivery/api/token/refresh/',
-      baseURL: 'http://192.168.43.120:8080/',
-      // baseURL: 'https://try-coding.herokuapp.com/',
+      // baseURL: 'http://192.168.43.120:8080/',
+      baseURL: 'https://dj-docker2.herokuapp.com/',
     },
     loggedIn: '',
     registered: '',
@@ -222,7 +222,7 @@ export default new Vuex.Store({
 
     async SendBarcodeImage({ commit }, barcode_data) {
       console.log("commit: ", commit);
-      // console.log("barcode_data: ", barcode_data.imageFileData);
+      console.log("barcode_data: ", barcode_data.imageFileData);
 
       const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
       axios.post(url, {
