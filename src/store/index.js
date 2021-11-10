@@ -229,7 +229,16 @@ export default new Vuex.Store({
         image_bytes: barcode_data.imageFileData,
       })
         .then(res_decodebarcodeimage => {
-          console.log(res_decodebarcodeimage);
+          console.log(res_decodebarcodeimage.data['success']);
+          console.log(res_decodebarcodeimage.data['barcode']);
+
+          if (res_decodebarcodeimage.data['barcode'] != "no detection") {
+            console.log("try again");
+          } else {
+            console.log("detection succsful");
+
+          }
+          
           // alert('success')
           // Vue.$toast.open("Thank soon", {
           //   timeout: 4000
