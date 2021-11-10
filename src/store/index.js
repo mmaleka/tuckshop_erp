@@ -17,7 +17,7 @@ export default new Vuex.Store({
       obtainJWT: 'api-food_delivery/api/token/',
       refreshJWT: 'api-food_delivery/api/token/refresh/',
       // baseURL: 'http://192.168.43.120:8080/',
-      baseURL: 'https://dj-docker2.herokuapp.com/',
+      baseURL: 'https://nameless-escarpment-12330.herokuapp.com/https://dj-docker2.herokuapp.com/',
     },
     loggedIn: '',
     registered: '',
