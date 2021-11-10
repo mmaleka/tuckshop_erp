@@ -1,7 +1,8 @@
 <template>
     <div class="camera">
         <video autoplay class="feed"></video>
-        <button class="snap" v-on:click="$emit('takePicture')">SNAP</button>
+        <!-- <button class="snap" v-on:click="$emit('takePicture')">SNAP</button> -->
+        <button class="snap" @click="takePicture">SNAP</button>
     </div>
 </template>
 
@@ -14,37 +15,37 @@ export default {
             if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
 
                 let constraints = {
-                    // video: {
-                    //     width: {
-                    //         min: 1280,
-                    //         ideal: 1920,
-                    //         max: 2560,
-                    //     },
-                    //     height: {
-                    //         min: 720,
-                    //         ideal: 1080,
-                    //         max: 1440,
-                    //     },
-                    //     // facingMode: {
-                    //     //     exact: 'environment'
-                    //     // },
-                    // },
-
                     video: {
                         width: {
-                            min: 1500,
-                            ideal: 3600,
-                            max: 3600,
+                            min: 1280,
+                            ideal: 1920,
+                            max: 2560,
                         },
                         height: {
-                            min: 2000,
-                            ideal: 2600,
-                            max: 2600,
+                            min: 720,
+                            ideal: 1080,
+                            max: 1440,
                         },
-                        facingMode: {
-                            exact: 'environment'
-                        },
+                        // facingMode: {
+                        //     exact: 'environment'
+                        // },
                     },
+
+                    // video: {
+                    //     width: {
+                    //         min: 1500,
+                    //         ideal: 3600,
+                    //         max: 3600,
+                    //     },
+                    //     height: {
+                    //         min: 2000,
+                    //         ideal: 2600,
+                    //         max: 2600,
+                    //     },
+                    //     facingMode: {
+                    //         exact: 'environment'
+                    //     },
+                    // },
                     
                 }
 
@@ -56,7 +57,24 @@ export default {
             } else {
                 alert("cannot get media Devices")
             }
-        }
+        },
+        takePicture(){
+            console.log("taking pic here");
+            console.log("take picture");
+            let ratio = (window.innerHeight < window.innerWidth) ? 16 / 11 : 11 / 16;  
+            const picture = document.querySelector("canvas");
+            picture.width = (window.innerWidth < 1280) ? window.innerWidth : 1280;
+            picture.height = window.innerWidth / ratio;
+            const ctx = picture.getContext("2d");
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = "high";
+            ctx.drawImage(document.querySelector("video"), 0, 0, picture.width, picture.height)
+
+            const imageFileData = picture.toDataURL('image/jpeg', 1);
+            // console.log(imageFileData);
+
+            this.$store.dispatch('SendBarcodeImage', { imageFileData })
+            }
     },
     beforeMount (){
         this.init();

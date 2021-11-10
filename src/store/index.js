@@ -239,10 +239,7 @@ export default new Vuex.Store({
 
           }
           
-          // alert('success')
-          // Vue.$toast.open("Thank soon", {
-          //   timeout: 4000
-          // });
+          
         })
         .catch(err => {
           console.error(err)
