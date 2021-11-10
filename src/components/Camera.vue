@@ -33,13 +33,13 @@ export default {
                     video: {
                         width: {
                             min: 1500,
-                            ideal: 3800,
-                            max: 3800,
+                            ideal: 3600,
+                            max: 3600,
                         },
                         height: {
                             min: 2000,
-                            ideal: 2800,
-                            max: 2800,
+                            ideal: 2600,
+                            max: 2600,
                         },
                         facingMode: {
                             exact: 'environment'
