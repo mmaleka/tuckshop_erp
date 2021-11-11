@@ -38,7 +38,14 @@
                 class="router_link" 
                 to="/"
                 >
-                    <v-btn block color="" dark>Home</v-btn>
+                    <v-btn block color="" dark>Sell Product</v-btn>
+                </router-link>
+
+                <router-link 
+                class="router_link" 
+                to="/addproduct"
+                >
+                    <v-btn block color="" dark>Add Product</v-btn>
                 </router-link>
                 
                 
@@ -48,21 +55,6 @@
                 >
                     <v-btn block color="" dark>Sign In</v-btn>
                 </router-link>
-
-                <!-- <router-link 
-                class="router_link" 
-                to="/signup"
-                >
-                    <v-btn block color="" dark>Sign Up</v-btn>
-                </router-link> -->
-
-                <!-- <router-link 
-                class="router_link" 
-                to="/about"
-                >
-                    <v-btn block color="" dark>About</v-btn>
-                </router-link> -->
-
 
 
             </v-list-item-content>
@@ -74,14 +66,14 @@
             link
             >
             <v-list-item-content>
-                <v-list-item-title>Personal</v-list-item-title>
+                <v-list-item-title>Dashboard</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
             <router-link 
             class="router_link" 
             to="/profile"
             >
-                <v-btn block color="">Profile</v-btn>
+                <v-btn block color="">Dashboard</v-btn>
             </router-link>
 
         </v-list>

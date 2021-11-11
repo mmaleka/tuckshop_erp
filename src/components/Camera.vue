@@ -16,34 +16,34 @@ export default {
 
                 let constraints = {
 
-                    // video: {
-                    //     width: {
-                    //         min: 1280,
-                    //         ideal: 1920,
-                    //         max: 2560,
-                    //     },
-                    //     height: {
-                    //         min: 720,
-                    //         ideal: 1080,
-                    //         max: 1440,
-                    //     },
-                    // },
-
                     video: {
                         width: {
-                            min: 1500,
-                            ideal: 3600,
-                            max: 3600,
+                            min: 1280,
+                            ideal: 1920,
+                            max: 2560,
                         },
                         height: {
-                            min: 2000,
-                            ideal: 2600,
-                            max: 2600,
-                        },
-                        facingMode: {
-                            exact: 'environment'
+                            min: 720,
+                            ideal: 1080,
+                            max: 1440,
                         },
                     },
+
+                    // video: {
+                    //     width: {
+                    //         min: 1500,
+                    //         ideal: 3600,
+                    //         max: 3600,
+                    //     },
+                    //     height: {
+                    //         min: 2000,
+                    //         ideal: 2600,
+                    //         max: 2600,
+                    //     },
+                    //     facingMode: {
+                    //         exact: 'environment'
+                    //     },
+                    // },
                     
                 }
 
@@ -69,8 +69,6 @@ export default {
             ctx.drawImage(document.querySelector("video"), 0, 0, picture.width, picture.height)
 
             const imageFileData = picture.toDataURL('image/jpeg', 1);
-            // console.log(imageFileData);
-
             this.$store.dispatch('SendBarcodeImage', { imageFileData })
             }
     },

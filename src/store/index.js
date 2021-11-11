@@ -222,7 +222,6 @@ export default new Vuex.Store({
 
     async SendBarcodeImage({ commit }, barcode_data) {
       console.log("commit: ", commit);
-      console.log("barcode_data: ", barcode_data.imageFileData);
 
       const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
       axios.post(url, {

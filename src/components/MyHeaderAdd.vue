@@ -8,7 +8,7 @@
     <v-row align="center" justify="center">
         <v-col xs="12" sm="8" md="8" lg="8" xl="8" cols="12">
             <p class="text-justify">
-                snap barcodes to add to database
+                snap to add to item database
             </p>
         </v-col>
     </v-row>
