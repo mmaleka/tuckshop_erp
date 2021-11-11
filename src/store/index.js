@@ -24,6 +24,8 @@ export default new Vuex.Store({
     categories_data: [],
     products_data: [],
     product_detail_data: [],
+    barcode_success: '',
+    barcode_data: '',
   },
   mutations: {
     updateToken(state, newToken) {
@@ -74,6 +76,8 @@ export default new Vuex.Store({
     userjwt: state => state.jwt,
     userName1: state => state.username,
     loggedIn: state => state.loggedIn,
+    barcode_success: state => state.barcode_success,
+    barcode_data: state => state.barcode_data,
 
   },
   actions: {
@@ -222,6 +226,7 @@ export default new Vuex.Store({
 
     async SendBarcodeImage({ commit }, barcode_data) {
       console.log("commit: ", commit);
+      this.state.barcode_data = '---';
 
       const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
       axios.post(url, {
@@ -230,21 +235,30 @@ export default new Vuex.Store({
         .then(res_decodebarcodeimage => {
           console.log(res_decodebarcodeimage.data['success']);
           console.log(res_decodebarcodeimage.data['barcode']);
-
-          if (res_decodebarcodeimage.data['barcode'] != "no detection") {
-            console.log("try again");
-          } else {
-            console.log("detection succsful");
-
-          }
-          
-          
+          this.state.barcode_success = res_decodebarcodeimage.data['success'];
+          this.state.barcode_data = res_decodebarcodeimage.data['barcode'];
         })
         .catch(err => {
           console.error(err)
           alert(err)
         });
+    },
 
+
+    async addNewItem({ commit }, itemData) {
+      console.log("commit: ", commit);
+      console.log("itemdata: ", itemData);
+
+      // const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
+      // axios.post(url, {
+      //   image_bytes: barcode_data.imageFileData,
+      // })
+      //   .then(res_decodebarcodeimage => {
+      //     console.log(res_decodebarcodeimage.data['success']);
+      //   })
+      //   .catch(err => {
+      //     console.error(err)
+      //   });
     },
 
 

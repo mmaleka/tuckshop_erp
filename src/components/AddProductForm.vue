@@ -1,60 +1,46 @@
 <template>
     <v-container fluid>
-        <v-row align="center" justify="center">
-            <h3 class="blue-grey--text">Register</h3>
-        </v-row>
+        <!-- hi {{ $store.getters.barcode_data }} - {{ barcode_data }} -->
+        
         <v-row align="center" justify="center">
             <v-col cols="8">
                 <ValidationObserver ref="observer" v-slot="{ }">
                     <form>
-                    <ValidationProvider v-slot="{ errors }" name="cell_number" rules="required|max:20">
+                    <ValidationProvider v-slot="{ errors }" name="barcode_data" rules="required">
                         <v-text-field
-                        v-model="username"
-                        :counter="20"
+                        v-model="barcode_data"
                         :error-messages="errors"
-                        label="username"
+                        label="barcode"
                         required
                         ></v-text-field>
                     </ValidationProvider>
-                    <ValidationProvider v-slot="{ errors }" name="first_name" rules="required|max:20">
+                    <ValidationProvider v-slot="{ errors }" name="itemdescription" rules="required">
                         <v-text-field
-                        v-model="first_name"
-                        :counter="20"
+                        v-model="itemdescription"
                         :error-messages="errors"
-                        label="first_name"
+                        label="item description"
                         required
                         ></v-text-field>
                     </ValidationProvider>
-                    <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
+                    <ValidationProvider v-slot="{ errors }" name="itemquantity" rules="required">
                         <v-text-field
-                        v-model="email"
+                        v-model="itemquantity"
                         :error-messages="errors"
-                        label="E-mail"
+                        label="item quantity"
                         required
                         ></v-text-field>
                     </ValidationProvider>
-                    <ValidationProvider v-slot="{ errors }" name="password" rules="required">
+                    <ValidationProvider v-slot="{ errors }" name="price" rules="required">
                         <v-text-field
-                        v-model="password"
+                        v-model="price"
                         :error-messages="errors"
-                        label="password"
-                        required
-                        ></v-text-field>
-                    </ValidationProvider>
-                    <ValidationProvider v-slot="{ errors }" name="password_confirm" rules="required">
-                        <v-text-field
-                        v-model="password_confirm"
-                        :error-messages="errors"
-                        label="password_confirm"
+                        label="price"
                         required
                         ></v-text-field>
                     </ValidationProvider>
 
-
-                    <!-- <v-btn class="mr-4" @click="submit">submit</v-btn> -->
                     <v-btn block type="submit" @click="AddItem" value="Submit" color="warning" dark>add item</v-btn>
 
-                    
                     </form>
                 </ValidationObserver>
             </v-col>
@@ -63,8 +49,9 @@
 </template>
 
 <script>
-  import { required, email, max } from 'vee-validate/dist/rules'
+  import { required } from 'vee-validate/dist/rules'
   import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+  import { mapGetters } from 'vuex';
 
   setInteractionMode('eager')
 
@@ -73,27 +60,16 @@
     message: '{_field_} can not be empty',
   })
 
-  extend('max', {
-    ...max,
-    message: '{_field_} may not be greater than {length} characters',
-  })
-
-  extend('email', {
-    ...email,
-    message: 'Email must be valid',
-  })
-
   export default {
     components: {
       ValidationProvider,
       ValidationObserver,
     },
     data: () => ({
-        username: '',
-        first_name: '',
-        email: '',
-        password: '',
-        password_confirm: '',
+        // barcode: '',
+        itemdescription: '',
+        itemquantity: 1,
+        price: '',
     }),
 
     methods: {
@@ -104,15 +80,18 @@
           this.$refs.observer.validate()
           e.preventDefault();
             const itemData = {
-                username: this.username,
-                password: this.password,
-                first_name: this.first_name,
-                email: this.email,
-                password_confirm: this.password_confirm
+                barcode: this.barcode_data,
+                itemdescription: this.itemdescription,
+                itemquantity: this.itemquantity,
+                price: this.price,
             }
             // update database
-            this.$store.dispatch('newItem', itemData)
+            this.$store.dispatch('addNewItem', itemData)
       },
+    },
+
+    computed: {
+        ...mapGetters(['barcode_success', 'barcode_data'])
     },
 
     mounted() {
