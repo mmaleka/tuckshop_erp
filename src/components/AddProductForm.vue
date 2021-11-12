@@ -51,7 +51,7 @@
 <script>
   import { required } from 'vee-validate/dist/rules'
   import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
-  import { mapGetters } from 'vuex';
+//   import { mapGetters } from 'vuex';
 
   setInteractionMode('eager')
 
@@ -67,9 +67,9 @@
     },
     data: () => ({
         // barcode: '',
-        itemdescription: '',
+        // itemdescription: '',
         itemquantity: 1,
-        price: '',
+        // price: '',
     }),
 
     methods: {
@@ -91,7 +91,28 @@
     },
 
     computed: {
-        ...mapGetters(['barcode_success', 'barcode_data'])
+        // ...mapGetters(['barcode_success', 'barcode_data', 'itemdescription', 'price'])
+        barcode_data: {
+            get () {
+                return this.$store.state.barcode_data
+            },
+        },
+        itemdescription: {
+            get () {
+                return this.$store.state.itemdescription
+            },
+            set (value) {
+                this.$store.commit('updateitemdescription', value)
+            }
+        },
+        price: {
+            get () {
+                return this.$store.state.price
+            },
+            set (value) {
+                this.$store.commit('updateprice', value)
+            }
+        },
     },
 
     mounted() {

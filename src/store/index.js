@@ -16,7 +16,7 @@ export default new Vuex.Store({
     endpoints: {
       obtainJWT: 'api-food_delivery/api/token/',
       refreshJWT: 'api-food_delivery/api/token/refresh/',
-      // baseURL: 'http://192.168.43.120:8080/',
+      baseURL2: 'http://192.168.43.120:8080/',
       baseURL: 'https://nameless-escarpment-12330.herokuapp.com/https://dj-docker2.herokuapp.com/',
     },
     loggedIn: '',
@@ -26,6 +26,10 @@ export default new Vuex.Store({
     product_detail_data: [],
     barcode_success: '',
     barcode_data: '',
+    itemdescription: '',
+    stockitemquantity: '',
+    price: '',
+    alreadyexists: false,
   },
   mutations: {
     updateToken(state, newToken) {
@@ -67,7 +71,12 @@ export default new Vuex.Store({
         state.authorization = '';
       }
     },
-    
+    updateitemdescription(state, value) {
+      state.itemdescription = value
+    },
+    updateprice(state, value) {
+      state.price = value
+    },
 
   },
   getters: {
@@ -78,7 +87,9 @@ export default new Vuex.Store({
     loggedIn: state => state.loggedIn,
     barcode_success: state => state.barcode_success,
     barcode_data: state => state.barcode_data,
-
+    itemdescription: state => state.itemdescription,
+    stockitemquantity: state => state.stockitemquantity,
+    price: state => state.price,
   },
   actions: {
     obtainToken({ commit }, user) {
@@ -223,42 +234,104 @@ export default new Vuex.Store({
         .catch(err => console.error(err));
     },
 
+    async GetBarcodeData({ commit }, barcode_info) {
+      console.log(barcode_info, commit);
+      const url_get_barcode = this.state.endpoints.baseURL2 + 'api-barcodepos/checkitem/?barcode_search=' + barcode_info
+      
+      if (barcode_info != "no detection") {
+        axios.get(url_get_barcode)
+          .then(res => {
+            // now add this data to the productform
+            if (res.data[0] != null) {
+              console.log("res.data[0]: ", res.data[0]);
+              this.state.itemdescription = res.data[0]['itemdescription'];
+              this.state.price = res.data[0]['price'];
+              this.state.stockitemquantity = res.data[0]['stockitemquantity'];
+              this.state.alreadyexists = true
+            } else {
+              this.state.alreadyexists = false
+            }
+
+          })
+          .catch(err => {
+            console.error(err)
+            alert(err)
+          });
+      }
+      
+
+    },
+
 
     async SendBarcodeImage({ commit }, barcode_data) {
       console.log("commit: ", commit);
-      this.state.barcode_data = '---';
+      this.state.barcode_data = '';
+      this.state.itemdescription = '';
+      this.state.stockitemquantity = '';
+      this.state.price = '';
 
       const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
       axios.post(url, {
-        image_bytes: barcode_data.imageFileData,
-      })
+          image_bytes: barcode_data.imageFileData,
+        })
         .then(res_decodebarcodeimage => {
           console.log(res_decodebarcodeimage.data['success']);
           console.log(res_decodebarcodeimage.data['barcode']);
+          let barcode_info = res_decodebarcodeimage.data['barcode']
+
           this.state.barcode_success = res_decodebarcodeimage.data['success'];
-          this.state.barcode_data = res_decodebarcodeimage.data['barcode'];
+          this.state.barcode_data = barcode_info;
+          this.dispatch('GetBarcodeData', { barcode_info });
         })
         .catch(err => {
           console.error(err)
           alert(err)
         });
+
     },
 
 
     async addNewItem({ commit }, itemData) {
       console.log("commit: ", commit);
       console.log("itemdata: ", itemData);
+      console.log("this.state.price: ", this.state.stockitemquantity);
+      console.log("this.state.alreadyexists: ", this.state.alreadyexists);
+      console.log(parseInt(itemData['itemquantity']));
+      console.log(parseInt(this.state.stockitemquantity));
+      const url = this.state.endpoints.baseURL2 + 'api-barcodepos/additem/'
 
-      // const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
-      // axios.post(url, {
-      //   image_bytes: barcode_data.imageFileData,
-      // })
-      //   .then(res_decodebarcodeimage => {
-      //     console.log(res_decodebarcodeimage.data['success']);
-      //   })
-      //   .catch(err => {
-      //     console.error(err)
-      //   });
+
+      
+      if (this.state.alreadyexists == false) {
+        axios.post(url, {
+          itemdescription: itemData['itemdescription'],
+          stockitemquantity: parseInt(itemData['itemquantity']) + parseInt(this.state.stockitemquantity),
+          price: itemData['price']
+        })
+          .then(res => {
+            console.log(res.data);
+          })
+          .catch(err => {
+            console.error(err)
+          });
+      } else {
+        console.log("item already exists in db only update the quantity");
+        axios.post(url, {
+          barcode_data: this.state.barcode_data,
+          itemdescription: itemData['itemdescription'],
+          stockitemquantity: parseInt(itemData['itemquantity']) + parseInt(this.state.stockitemquantity),
+          price: itemData['price']
+        })
+          .then(res => {
+            console.log(res.data);
+          })
+          .catch(err => {
+            console.error(err)
+          });
+      }
+
+
+      
     },
 
 
