@@ -34,7 +34,7 @@ export default new Vuex.Store({
     order_list: [],
     order: [],
     barcode_data_type: '',
-    new_order_id: '',
+    // new_order_id: '',
   },
   mutations: {
     updateToken(state, newToken) {
@@ -284,7 +284,7 @@ export default new Vuex.Store({
                 product: res.data[0].id
               })
                 .then(res => {
-                  const new_order_id = res.data.id
+                  console.log(res);
                   this.dispatch('getIncompleteOrderList', { order_id });
                 })
                 .catch(err => {
