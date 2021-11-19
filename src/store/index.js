@@ -16,8 +16,8 @@ export default new Vuex.Store({
     endpoints: {
       obtainJWT: 'api-food_delivery/api/token/',
       refreshJWT: 'api-food_delivery/api/token/refresh/',
-      baseURL2: 'http://192.168.2.120:8080/',
-      // baseURL2: 'https://try-coding.herokuapp.com/',
+      // baseURL2: 'http://192.168.2.120:8080/',
+      baseURL2: 'https://try-coding.herokuapp.com/',
       baseURL: 'https://nameless-escarpment-12330.herokuapp.com/https://dj-docker2.herokuapp.com/',
     },
     loggedIn: '',
@@ -253,7 +253,7 @@ export default new Vuex.Store({
     async GetBarcodeData({ commit }, barcode_info) {
       console.log(barcode_info, commit);
       barcode_info = 456789
-      const url_get_barcode = this.state.endpoints.baseURL2 + 'api-barcodepos/checkitem/?barcode_search=' + barcode_info
+      const url_get_barcode = this.state.endpoints.baseURL2 + 'api-tuckshoppos/checkitem/?barcode_search=' + barcode_info
 
       if (barcode_info != "no detection") {
         await axios.get(url_get_barcode)
@@ -278,7 +278,7 @@ export default new Vuex.Store({
               // 2.get the product id ==> res.data[0].id
               // 3.defualt quantity is one.
 
-              const url = this.state.endpoints.baseURL2 + "api-barcodepos/add_order_items/"
+              const url = this.state.endpoints.baseURL2 + "api-tuckshoppos/add_order_items/"
               axios.post(url, {
                 Order: order_id,
                 product: res.data[0].id
@@ -335,7 +335,7 @@ export default new Vuex.Store({
 
     async addNewItem({ commit }, itemData) {
       console.log("commit: ", commit);
-      const url = this.state.endpoints.baseURL2 + 'api-barcodepos/additem/'
+      const url = this.state.endpoints.baseURL2 + 'api-tuckshoppos/additem/'
       alert(this.state.alreadyexists)
       if (this.state.alreadyexists == false) {
         axios.post(url, {
@@ -368,7 +368,7 @@ export default new Vuex.Store({
 
     async orderList({ commit }) {
       console.log("commit: ", commit);
-      var url_get_orderlist = this.state.endpoints.baseURL2 + 'api-barcodepos/order_list/?user_id=' + 1
+      var url_get_orderlist = this.state.endpoints.baseURL2 + 'api-tuckshoppos/order_list/?user_id=' + 1
       axios.get(url_get_orderlist)
         .then(res => {
           this.state.order_list = res.data
@@ -384,7 +384,7 @@ export default new Vuex.Store({
     async createNewOrder({ commit }) {
       console.log("commit: ", commit);
       //add new order to database and prepare for adding items
-      const url = this.state.endpoints.baseURL2 + 'api-barcodepos/generate_order/'
+      const url = this.state.endpoints.baseURL2 + 'api-tuckshoppos/generate_order/'
       axios.post(url, {
               shopName: 1,
               commentOrderdata: "this field is useless"
@@ -413,7 +413,7 @@ export default new Vuex.Store({
         order_id: order_id.order_id,
         completed: "False",
       };
-      const url = this.state.endpoints.baseURL2 + 'api-barcodepos/order_list/'
+      const url = this.state.endpoints.baseURL2 + 'api-tuckshoppos/order_list/'
       axios.get(url, { params })
         .then(response => {
           console.log("response100: ", response.data);
@@ -443,7 +443,7 @@ export default new Vuex.Store({
         user_id: 1,
         order_id: 152,
       };
-      const url = this.state.endpoints.baseURL2 + 'api-barcodepos/order_list/'
+      const url = this.state.endpoints.baseURL2 + 'api-tuckshoppos/order_list/'
       axios.get(url, { params })
       .then(response => {
         console.log("response100: ", response.data);
@@ -468,7 +468,7 @@ export default new Vuex.Store({
       console.log("---: ", this.state.order.orderItems);
 
       // update the order to completed to appear
-      const url = this.state.endpoints.baseURL2 + 'api-barcodepos/order_rud/' + this.state.new_order_id + '/'
+      const url = this.state.endpoints.baseURL2 + 'api-tuckshoppos/order_rud/' + this.state.new_order_id + '/'
       axios.patch(url, {
         completed: true,
       })
@@ -483,7 +483,7 @@ export default new Vuex.Store({
       for (let i = 0; i < this.state.order.orderItems.length; i++) {
         console.log("xxx: ", this.state.order.orderItems[i].id, this.state.order.orderItems[i].quantity);
 
-        const url = this.state.endpoints.baseURL2 + 'api-barcodepos/order_item_rud/' + this.state.order.orderItems[i].id+'/'
+        const url = this.state.endpoints.baseURL2 + 'api-tuckshoppos/order_item_rud/' + this.state.order.orderItems[i].id+'/'
         axios.patch(url, {
           quantity: this.state.order.orderItems[i].quantity,
         })
