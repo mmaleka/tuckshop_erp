@@ -1,26 +1,26 @@
 <template>
   <div class="home">
     <MyNav />
-    <MyHeaderSell />
-    <Camera />
-    <BarcodeImage />
+    <OrderList />
+    <!-- <Camera />
+    <BarcodeImage /> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import MyHeaderSell from '@/components/MyHeaderSell.vue';
 import MyNav from '@/components/MyNav.vue';
-import Camera from '@/components/Camera.vue';
-import BarcodeImage from '@/components/BarcodeImage.vue';
+import OrderList from '@/components/OrderList.vue'
+// import Camera from '@/components/Camera.vue';
+// import BarcodeImage from '@/components/BarcodeImage.vue';
  
 export default {
   name: 'Home',
   components: {
-    MyHeaderSell,
     MyNav,
-    Camera,
-    BarcodeImage,
+    OrderList,
+    // Camera,
+    // BarcodeImage,
   },
   methods: {
 

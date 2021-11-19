@@ -1,7 +1,6 @@
 <template>
     <v-container fluid>
-        <!-- hi {{ $store.getters.barcode_data }} - {{ barcode_data }} -->
-        
+
         <v-row align="center" justify="center">
             <v-col cols="8">
                 <ValidationObserver ref="observer" v-slot="{ }">

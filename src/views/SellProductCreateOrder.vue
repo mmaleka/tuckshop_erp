@@ -1,38 +1,43 @@
 <template>
   <div class="home">
     <MyNav />
-    <MyHeaderAdd />
     <Camera />
     <BarcodeImage />
-    <AddProductForm />
+    <SellProductForm />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import MyHeaderAdd from '@/components/MyHeaderAdd.vue';
 import MyNav from '@/components/MyNav.vue';
 import Camera from '@/components/Camera.vue';
 import BarcodeImage from '@/components/BarcodeImage.vue';
-import AddProductForm from '@/components/AddProductForm.vue';
+import SellProductForm from '@/components/SellProductForm.vue';
+
+import { mapGetters } from 'vuex';
  
 export default {
   name: 'Home',
   components: {
-    MyHeaderAdd,
     MyNav,
     Camera,
     BarcodeImage,
-    AddProductForm,
+    SellProductForm,
   },
   methods: {
 
   },
 
   mounted(){
-    console.log("add product component mounted");
-    this.$store.commit('updatebarcode_data_type', 'add')
+    console.log("sell product create order component mounted");
+    let order_id = this.$route.params.id
+    console.log("order_id: ", order_id);
+    this.$store.commit('updatebarcode_data_type', 'sell')
   },
+
+  computed: {
+      ...mapGetters(['barcode_data_type']),
+  }, 
 }
 </script>
 

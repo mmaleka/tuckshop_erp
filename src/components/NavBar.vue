@@ -61,7 +61,7 @@
         </v-list-item>
         <v-divider></v-divider>
 
-        <v-list dense>
+        <!-- <v-list dense>
             <v-list-item
             link
             >
@@ -76,7 +76,7 @@
                 <v-btn block color="">Dashboard</v-btn>
             </router-link>
 
-        </v-list>
+        </v-list> -->
 
     </v-navigation-drawer>
 

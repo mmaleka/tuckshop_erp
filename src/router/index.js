@@ -1,14 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import SellProduct from '../views/SellProduct.vue'
+import SellProductHome from '../views/SellProductHome.vue'
+import SellProductCreateOrder from '../views/SellProductCreateOrder.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'SellProduct',
-    component: SellProduct
+    name: 'SellProductHome',
+    component: SellProductHome
+  },
+  {
+    path: '/sellproductcreateorder/:id',
+    name: 'SellProductCreateOrder',
+    component: SellProductCreateOrder
   },
   {
     path: '/login',

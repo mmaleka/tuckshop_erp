@@ -3,13 +3,18 @@
         <video autoplay class="feed"></video>
         <!-- <button class="snap" v-on:click="$emit('takePicture')">SNAP</button> -->
         <button class="snap" @click="takePicture">SNAP</button>
+        <!-- <p>{{ data_type }}</p> -->
     </div>
 </template>
 
 
 <script>
 export default {
+    
     name: "camera",
+    // props:{
+    //     title:String,
+    // },
     methods: {
         init () {
             if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
