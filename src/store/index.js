@@ -34,7 +34,7 @@ export default new Vuex.Store({
     order_list: [],
     order: [],
     barcode_data_type: '',
-    // new_order_id: '',
+    new_order_id: '',
   },
   mutations: {
     updateToken(state, newToken) {
