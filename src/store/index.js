@@ -252,6 +252,7 @@ export default new Vuex.Store({
 
     async GetBarcodeData({ commit }, barcode_info) {
       console.log(barcode_info, commit);
+      alert("getting barcode")
       // barcode_info = 456789
       const url_get_barcode = this.state.endpoints.baseURL2 + 'api-tuckshoppos/checkitem/?barcode_search=' + barcode_info
 
@@ -264,6 +265,8 @@ export default new Vuex.Store({
               this.state.price = res.data[0]['price'];
               this.state.stockitemquantity = res.data[0]['stockitemquantity'];
               this.state.alreadyexists = true
+              console.log("this.state.alreadyexists: ", this.state.alreadyexists);
+              console.log(this.state.alreadyexists);
 
             } else {
               this.state.alreadyexists = false
@@ -309,7 +312,7 @@ export default new Vuex.Store({
       this.state.barcode_data = '';
       this.state.itemdescription = '';
       this.state.stockitemquantity = 0;
-      this.state.price = '';
+      this.state.price = 0;
 
       const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
       axios.post(url, {
