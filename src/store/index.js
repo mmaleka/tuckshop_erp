@@ -345,11 +345,12 @@ export default new Vuex.Store({
         })
           .then(res => {
             console.log(res.data);
-            alert(res.data)
+            alert(res.data[0])
+            alert("res.data[0]")
           })
           .catch(err => {
             console.error(err)
-            alert(err)
+            alert("err")
           });
       } else {
         axios.post(url, {
