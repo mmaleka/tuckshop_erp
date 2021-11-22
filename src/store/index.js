@@ -308,7 +308,7 @@ export default new Vuex.Store({
       console.log("commit: ", commit);
       this.state.barcode_data = '';
       this.state.itemdescription = '';
-      this.state.stockitemquantity = '';
+      this.state.stockitemquantity = 0;
       this.state.price = '';
 
       const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
