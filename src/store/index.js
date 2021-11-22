@@ -253,12 +253,13 @@ export default new Vuex.Store({
     async GetBarcodeData({ commit }, barcode_info) {
       console.log(barcode_info, commit);
       alert("getting barcode")
+      alert(this.state.barcode_data)
       // barcode_info = String(0765756931182);
-      const url_get_barcode = this.state.endpoints.baseURL2 + 'api-tuckshoppos/checkitem/?barcode_search=' + barcode_info
+      const url_get_barcode = this.state.endpoints.baseURL2 + 'api-tuckshoppos/checkitem/?barcode_search=' + this.state.barcode_data
 
       if (barcode_info != "no detection") {
         alert("barcode_info")
-        alert(barcode_info)
+        alert(this.state.barcode_data)
         await axios.get(url_get_barcode)
           .then(res => {
             // now add this data to the productform
