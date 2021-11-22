@@ -265,8 +265,8 @@ export default new Vuex.Store({
               this.state.price = res.data[0]['price'];
               this.state.stockitemquantity = res.data[0]['stockitemquantity'];
               this.state.alreadyexists = true
-              console.log("this.state.alreadyexists: ", this.state.alreadyexists);
-              console.log(this.state.alreadyexists);
+              alert("this.state.alreadyexists: ", this.state.alreadyexists);
+              alert(this.state.alreadyexists);
 
             } else {
               this.state.alreadyexists = false
