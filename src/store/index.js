@@ -336,11 +336,14 @@ export default new Vuex.Store({
     async addNewItem({ commit }, itemData) {
       console.log("commit: ", commit);
       const url = this.state.endpoints.baseURL2 + 'api-tuckshoppos/additem/'
+      const user_item_quantity = parseInt(itemData['itemquantity']) + parseInt(this.state.stockitemquantity)
+      alert(user_item_quantity)
       alert(this.state.alreadyexists)
       if (this.state.alreadyexists == false) {
         axios.post(url, {
+          barcode: itemData['barcode'],
           itemdescription: itemData['itemdescription'],
-          stockitemquantity: parseInt(itemData['itemquantity']) + parseInt(this.state.stockitemquantity),
+          stockitemquantity: user_item_quantity,
           price: itemData['price']
         })
           .then(res => {
