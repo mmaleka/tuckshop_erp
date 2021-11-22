@@ -252,7 +252,7 @@ export default new Vuex.Store({
 
     async GetBarcodeData({ commit }, barcode_info) {
       console.log(barcode_info, commit);
-      barcode_info = 456789
+      // barcode_info = 456789
       const url_get_barcode = this.state.endpoints.baseURL2 + 'api-tuckshoppos/checkitem/?barcode_search=' + barcode_info
 
       if (barcode_info != "no detection") {
