@@ -345,7 +345,7 @@ export default new Vuex.Store({
         })
           .then(res => {
             console.log(res.data);
-            alert(res.data[0])
+            alert(res.data)
           })
           .catch(err => {
             console.error(err)
