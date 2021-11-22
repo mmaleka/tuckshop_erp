@@ -257,6 +257,8 @@ export default new Vuex.Store({
       const url_get_barcode = this.state.endpoints.baseURL2 + 'api-tuckshoppos/checkitem/?barcode_search=' + barcode_info
 
       if (barcode_info != "no detection") {
+        alert("barcode_info")
+        alert(barcode_info)
         await axios.get(url_get_barcode)
           .then(res => {
             // now add this data to the productform
