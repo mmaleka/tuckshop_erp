@@ -27,6 +27,7 @@ export default new Vuex.Store({
     product_detail_data: [],
     barcode_success: '',
     barcode_data: '',
+    item_id: '',
     itemdescription: '',
     stockitemquantity: 0,
     price: '',
@@ -99,6 +100,7 @@ export default new Vuex.Store({
     loggedIn: state => state.loggedIn,
     barcode_success: state => state.barcode_success,
     barcode_data: state => state.barcode_data,
+    item_id: state => state.item_id,
     itemdescription: state => state.itemdescription,
     stockitemquantity: state => state.stockitemquantity,
     price: state => state.price,
@@ -264,6 +266,7 @@ export default new Vuex.Store({
           .then(res => {
             // now add this data to the productform
             if (res.data[0] != null) {
+              this.state.item_id = res.data[0]['id'];
               this.state.itemdescription = res.data[0]['itemdescription'];
               this.state.price = res.data[0]['price'];
               this.state.stockitemquantity = res.data[0]['stockitemquantity'];
@@ -363,10 +366,12 @@ export default new Vuex.Store({
             alert("err")
           });
       } else {
-        axios.post(url, {
-          barcode_data: this.state.barcode_data,
+        const url_update_barcode = this.state.endpoints.baseURL2 + 'api-tuckshoppos/item_rud/' + this.state.item_id + '/'
+
+        axios.patch(url_update_barcode, {
+          // barcode_data: this.state.barcode_data,
           itemdescription: itemData['itemdescription'],
-          stockitemquantity: parseInt(itemData['itemquantity']) + parseInt(this.state.stockitemquantity),
+          stockitemquantity: user_item_quantity,
           price: itemData['price']
         })
           .then(res => {
