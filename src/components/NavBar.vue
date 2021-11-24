@@ -31,6 +31,25 @@
             </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
+
+        <v-divider></v-divider>
+        <v-list dense>
+            <v-list-item
+            link
+            >
+            <v-list-item-content>
+                <v-list-item-title>Dashboard</v-list-item-title>
+            </v-list-item-content>
+            </v-list-item>
+            <router-link 
+            class="router_link" 
+            to="/dashboard"
+            >
+                <v-btn block color="">Dashboard</v-btn>
+            </router-link>
+
+        </v-list>
+
         <v-divider></v-divider>
         <v-list-item>
             <v-list-item-content>
@@ -61,22 +80,7 @@
         </v-list-item>
         <v-divider></v-divider>
 
-        <!-- <v-list dense>
-            <v-list-item
-            link
-            >
-            <v-list-item-content>
-                <v-list-item-title>Dashboard</v-list-item-title>
-            </v-list-item-content>
-            </v-list-item>
-            <router-link 
-            class="router_link" 
-            to="/profile"
-            >
-                <v-btn block color="">Dashboard</v-btn>
-            </router-link>
-
-        </v-list> -->
+        
 
     </v-navigation-drawer>
 

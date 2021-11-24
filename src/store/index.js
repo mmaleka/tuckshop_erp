@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '@/router/index.js'
+import VueJwtDecode from 'vue-jwt-decode';
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     jwt: localStorage.getItem('token'),
     username: localStorage.getItem('username'),
     username2: '',
+    username3: '',
     endpoints: {
       obtainJWT: 'api-food_delivery/api/token/',
       refreshJWT: 'api-food_delivery/api/token/refresh/',
@@ -22,6 +24,7 @@ export default new Vuex.Store({
     },
     loggedIn: '',
     registered: '',
+    user_id: '',
     categories_data: [],
     products_data: [],
     product_detail_data: [],
@@ -89,6 +92,22 @@ export default new Vuex.Store({
     updatebarcode_data_type(state, value) {
       state.barcode_data_type = value
     },
+    update_user_id(state) {
+      console.log("VueJwtDecode.decode(state.jwt): ", VueJwtDecode.decode(state.jwt));
+      const userJWT = VueJwtDecode.decode(state.jwt)
+      if (userJWT != null) {
+        state.user_id = VueJwtDecode.decode(state.jwt).user_id
+      }
+      console.log("user_id: ", this.state.user_id);
+    },
+    update_username3(state) {
+      console.log("VueJwtDecode.decode(state.jwt)xxxx: ", VueJwtDecode.decode(state.jwt));
+      const userJWT = VueJwtDecode.decode(state.jwt)
+      if (userJWT != null) {
+        state.username3 = VueJwtDecode.decode(state.jwt).username
+      }
+      console.log("username3: ", this.state.username3);
+    },
 
 
   },
@@ -98,6 +117,8 @@ export default new Vuex.Store({
     userjwt: state => state.jwt,
     userName1: state => state.username,
     loggedIn: state => state.loggedIn,
+    user_id: state => state.user_id,
+    username3: state => state.username3,
     barcode_success: state => state.barcode_success,
     barcode_data: state => state.barcode_data,
     item_id: state => state.item_id,
@@ -113,22 +134,25 @@ export default new Vuex.Store({
     obtainToken({ commit }, user) {
       const username = user.username
       console.log("user: ", user);
-      axios.post(this.state.endpoints.baseURL + this.state.endpoints.obtainJWT, user)
+      axios.post(this.state.endpoints.baseURL2 + this.state.endpoints.obtainJWT, user)
         .then((res) => {
           commit('updateToken', res.data.access);
           commit('updateUsername', username);
+          commit('update_user_id')
+          commit('update_username3')
           const token = res.data.token;
           axios.defaults.headers.common['Authorization'] = token
           this.state.username2 = username
           commit('loginSuccess', username)
           router.push('/');
           console.log("token: ", token);
-          Vue.$toast.open("Login successful", {
-            timeout: 2000
-          });
+          // Vue.$toast.open("Login successful", {
+          //   timeout: 2000
+          // });
         })
         .catch(err => {
           commit('loginFailure')
+          console.log("log in err: ", err);
 
           if (err.response.data.username) {
             Vue.$toast.error(err.response.data.username[0], {
@@ -157,7 +181,7 @@ export default new Vuex.Store({
     },
     newRegister({ commit }, registerdata) {
       const { username, first_name, email, password, password_confirm } = registerdata;
-      axios.post(this.state.endpoints.baseURL + 'api-food_delivery/auth/accounts/register/', {
+      axios.post(this.state.endpoints.baseURL2 + 'api-food_delivery/auth/accounts/register/', {
         username,
         first_name,
         email,
@@ -172,6 +196,7 @@ export default new Vuex.Store({
           console.log("res_user_id: ", res_user_id);
           this.dispatch('updateUserProfile', { res_user_id });
           commit('registerSuccess');
+          commit('update_user_id')
           // router.push('/');
           Vue.$toast.open("Registration successful", {
             timeout: 2000
@@ -210,7 +235,7 @@ export default new Vuex.Store({
       commit('nullShit');
       let user_id = res_user_id.res_user_id
       console.log("user_id: ", user_id);
-      let url_profileUpdate = this.state.endpoints.baseURL + 'api-accounts_profile/accounts_profile/'
+      let url_profileUpdate = this.state.endpoints.baseURL2 + 'api-accounts_profile/accounts_profile/'
       axios.post(url_profileUpdate, {
         user: user_id,
         tag: "tucksop go digital"
@@ -228,7 +253,7 @@ export default new Vuex.Store({
     async updateRegisterCount({ commit }, val) {
       console.log(commit);
       await axios
-        .post(this.state.endpoints.baseURL + 'api-analytics/api_register_count/', {
+        .post(this.state.endpoints.baseURL2 + 'api-analytics/api_register_count/', {
           views_count: 1,
           ip_address: val
         })
@@ -242,8 +267,9 @@ export default new Vuex.Store({
     async viewTrackerCount({ commit }, val) {
       console.log(commit);
       await axios
-        .post(this.state.endpoints.baseURL + 'api-analytics/api_viewtrackercount/', {
-          views_count: 1,
+        .post(this.state.endpoints.baseURL2 + 'api-analytics/api_viewtrackercount/', {
+          // views_count: 1,
+          views_count: this.state.user_id,
           view_type: val
         })
         .then(res => {
@@ -298,7 +324,7 @@ export default new Vuex.Store({
           })
           .catch(err => {
             console.error(err)
-            alert(err)
+            // alert(err)
           });
       }
       
@@ -374,7 +400,9 @@ export default new Vuex.Store({
 
     async orderList({ commit }) {
       console.log("commit: ", commit);
-      var url_get_orderlist = this.state.endpoints.baseURL2 + 'api-tuckshoppos/order_list/?user_id=' + 1
+      commit('update_user_id');
+      console.log("this.state.user_id: ", this.state.user_id);
+      var url_get_orderlist = this.state.endpoints.baseURL2 + 'api-tuckshoppos/order_list/?user_id=' + this.state.user_id
       axios.get(url_get_orderlist)
         .then(res => {
           this.state.order_list = res.data
@@ -392,8 +420,8 @@ export default new Vuex.Store({
       //add new order to database and prepare for adding items
       const url = this.state.endpoints.baseURL2 + 'api-tuckshoppos/generate_order/'
       axios.post(url, {
-              shopName: 1,
-              commentOrderdata: "this field is useless"
+        shopName: this.state.user_id,
+        commentOrderdata: "this field is useless"
       })
         .then(res => {
           console.log(res.data);
