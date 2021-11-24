@@ -381,7 +381,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.error(err)
-          alert(err)
+          // alert(err)
         });
     },
 
@@ -403,7 +403,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.error(err)
-          alert(err)
+          // alert(err)
         });
 
     },
