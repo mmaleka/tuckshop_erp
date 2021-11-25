@@ -13,7 +13,7 @@
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title>
-            <span class="font-weight-light">TuckShop </span>
+            <span class="font-weight-light">Salon </span>
             <span>Go Digital</span>
         </v-toolbar-title>
 
