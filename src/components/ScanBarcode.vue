@@ -5,6 +5,7 @@
       @loaded="() => onLoaded()"
     ></StreamBarcodeReader>
     Input Value: {{ text || "Nothing" }}
+    another value: {{ text2 }}
   </div>
 </template>
 
@@ -20,6 +21,7 @@ export default {
     data() {
       return {
         text: "",
+        text2: "",
         id: null,
       };
     },
@@ -28,9 +30,10 @@ export default {
     },
     methods: {
       onDecode(a, b, c) {
-        console.log("dgdfgdf");
+        console.log("starting...");
         console.log(a, b, c);
         this.text = a;
+        this.text2 = "starting"
         // if (this.id) clearTimeout(this.id);
         // this.id = setTimeout(() => {
         //   if (this.text === a) {
