@@ -28,14 +28,15 @@ export default {
     },
     methods: {
       onDecode(a, b, c) {
+        console.log("dgdfgdf");
         console.log(a, b, c);
         this.text = a;
-        if (this.id) clearTimeout(this.id);
-        this.id = setTimeout(() => {
-          if (this.text === a) {
-            this.text = "";
-          }
-        }, 5000);
+        // if (this.id) clearTimeout(this.id);
+        // this.id = setTimeout(() => {
+        //   if (this.text === a) {
+        //     this.text = "";
+        //   }
+        // }, 5000);
       },
       onLoaded() {
         console.log("load");
