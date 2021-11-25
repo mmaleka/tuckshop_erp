@@ -32,6 +32,7 @@ export default {
   mounted(){
     console.log("add product component mounted");
     this.$store.commit('updatebarcode_data_type', 'add')
+    this.$store.dispatch('viewTrackerCount', 'tuckshop addproduct')
   },
 }
 </script>

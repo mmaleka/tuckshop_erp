@@ -13,6 +13,10 @@ export default {
   components: {
     RegisterComp,
   },
+
+  mounted(){
+    this.$store.dispatch('viewTrackerCount', 'tuckshop register')
+  },
 }
 </script>
 

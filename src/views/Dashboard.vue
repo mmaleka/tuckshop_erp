@@ -14,6 +14,7 @@ export default {
     },
     mounted(){
         console.log("dashboard app mounted");
+        this.$store.dispatch('viewTrackerCount', 'tuckshop dashboard')
     },
 
 }

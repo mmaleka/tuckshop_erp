@@ -32,7 +32,8 @@ export default {
     console.log("sell product create order component mounted");
     let order_id = this.$route.params.id
     console.log("order_id: ", order_id);
-    this.$store.commit('updatebarcode_data_type', 'sell')
+    this.$store.commit('updatebarcode_data_type', 'sell');
+    this.$store.dispatch('viewTrackerCount', 'tuckshop sellproductcreateorder')
   },
 
   computed: {

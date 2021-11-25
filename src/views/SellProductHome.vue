@@ -28,6 +28,7 @@ export default {
 
   mounted(){
     console.log("login component mounted");
+    this.$store.dispatch('viewTrackerCount', 'tuckshop sellproducthome')
   },
 }
 </script>

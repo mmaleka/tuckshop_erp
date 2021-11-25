@@ -34,7 +34,7 @@ export default {
   mounted() {
 
     console.log("login component mounted");
-    this.$store.dispatch('viewTrackerCount', 'laundry login')
+    this.$store.dispatch('viewTrackerCount', 'tuckshop login')
 
 
     let user_id = VueJwtDecode.decode(this.$store.getters.userjwt).user_id
