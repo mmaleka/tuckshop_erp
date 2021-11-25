@@ -44,7 +44,7 @@ export default {
     },
 
     mounted(){
-    // this.$store.dispatch('viewTrackerCount', 'scanbarcode')
+    this.$store.dispatch('viewTrackerCount', 'scanbarcode')
   },
 }
 </script>
