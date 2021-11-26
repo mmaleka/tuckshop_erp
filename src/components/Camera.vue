@@ -1,7 +1,14 @@
 <template>
     <div class="camera">
+
+        <loading :active.sync="isLoading" 
+        :can-cancel="true" 
+        :on-cancel="onCancel"
+        :is-full-page="fullPage"></loading>
+        
         <video autoplay class="feed"></video>
         <!-- <button class="snap" v-on:click="$emit('takePicture')">SNAP</button> -->
+        {{ isLoading }}
         <button class="snap" @click="takePicture">SNAP</button>
         <!-- <p>{{ data_type }}</p> -->
     </div>
@@ -9,12 +16,25 @@
 
 
 <script>
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+import { mapGetters } from 'vuex';
+
 export default {
     
     name: "camera",
     // props:{
     //     title:String,
     // },
+    data() {
+        return {
+            // isLoading: false,
+            fullPage: true
+        }
+    },
+    components: {
+        Loading
+    },
     methods: {
         init () {
             if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
@@ -64,6 +84,11 @@ export default {
         takePicture(){
             console.log("taking pic here");
             console.log("take picture");
+            // this.isLoading = true;
+            //     // simulate AJAX
+            //     setTimeout(() => {
+            //       this.isLoading = false
+            //     },5000)
             let ratio = (window.innerHeight < window.innerWidth) ? 16 / 11 : 11 / 16;  
             const picture = document.querySelector("canvas");
             picture.width = (window.innerWidth < 1280) ? window.innerWidth : 1280;
@@ -75,7 +100,14 @@ export default {
 
             const imageFileData = picture.toDataURL('image/jpeg', 1);
             this.$store.dispatch('SendBarcodeImage', { imageFileData })
-            }
+        },
+        onCancel() {
+            console.log('User cancelled the loader.')
+        }
+
+    },
+    computed: {
+        ...mapGetters(['isLoading'])
     },
     beforeMount (){
         this.init();

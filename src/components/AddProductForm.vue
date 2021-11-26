@@ -1,6 +1,14 @@
 <template>
     <v-container fluid>
 
+        <loading :active.sync="isLoading"
+        :can-cancel="true"
+        :on-cancel="onCancel"
+        :is-full-page="fullPage"></loading>
+
+        <!-- <label><input type="checkbox" v-model="fullPage">Full page?</label> -->
+        <!-- <button @click.prevent="doAjax">fetch Data</button> -->
+
         <v-row align="center" justify="center">
             <v-col cols="8">
                 <ValidationObserver ref="observer" v-slot="{ }">
@@ -48,9 +56,13 @@
 </template>
 
 <script>
-  import { required } from 'vee-validate/dist/rules'
-  import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
-//   import { mapGetters } from 'vuex';
+import { required } from 'vee-validate/dist/rules'
+import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+
+
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 
   setInteractionMode('eager')
 
@@ -63,12 +75,12 @@
     components: {
       ValidationProvider,
       ValidationObserver,
+      Loading,
     },
     data: () => ({
-        // barcode: '',
-        // itemdescription: '',
         itemquantity: 1,
-        // price: '',
+        isLoading: false,
+        fullPage: true,
     }),
 
     methods: {
@@ -87,6 +99,16 @@
             // update database
             this.$store.dispatch('addNewItem', itemData)
       },
+      doAjax(){
+          this.isLoading = true;
+          //simulate get request
+          setTimeout(() => {
+              this.isLoading = false
+          },5000)
+      },
+      onCancel() {
+          console.log("user cancelled the loader");
+      }
     },
 
     computed: {

@@ -39,6 +39,7 @@ export default new Vuex.Store({
     order: [],
     barcode_data_type: '',
     new_order_id: '',
+    isLoading: false,
   },
   mutations: {
     updateToken(state, newToken) {
@@ -108,6 +109,9 @@ export default new Vuex.Store({
       }
       console.log("username3: ", this.state.username3);
     },
+    updateisLoading(state, value) {
+      state.isLoading = value
+    },
 
 
   },
@@ -129,6 +133,7 @@ export default new Vuex.Store({
     order: state => state.order,
     barcode_data_type: state => state.barcode_data_type,
     new_order_id: state => state.new_order_id,
+    isLoading: state => state.isLoading,
   },
   actions: {
     obtainToken({ commit }, user) {
@@ -338,6 +343,7 @@ export default new Vuex.Store({
       this.state.itemdescription = '';
       this.state.stockitemquantity = 0;
       this.state.price = 0;
+      this.state.isLoading = true;
 
       const url = this.state.endpoints.baseURL + 'api-barcodedetection/barcodedetection/'
       axios.post(url, {
@@ -347,15 +353,22 @@ export default new Vuex.Store({
           console.log(res_decodebarcodeimage.data['success']);
           console.log(res_decodebarcodeimage.data['barcode']);
           let barcode_info = res_decodebarcodeimage.data['barcode']
+          this.state.isLoading = false;
 
           this.state.barcode_success = res_decodebarcodeimage.data['success'];
           this.state.barcode_data = barcode_info;
-          alert(barcode_info)
-          this.dispatch('GetBarcodeData', { barcode_info });
+          if (this.state.barcode_data == "no detection") {
+            alert("no detection, try again")
+          } else {
+            this.dispatch('GetBarcodeData', { barcode_info });
+          }
+          
+          
         })
         .catch(err => {
           console.error(err)
           alert(err)
+          this.state.isLoading = false;
         });
 
     },
