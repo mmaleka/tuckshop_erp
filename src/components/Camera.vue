@@ -7,10 +7,7 @@
         :is-full-page="fullPage"></loading>
         
         <video autoplay class="feed"></video>
-        <!-- <button class="snap" v-on:click="$emit('takePicture')">SNAP</button> -->
-        {{ isLoading }}
-        <button class="snap" @click="takePicture">SNAP</button>
-        <!-- <p>{{ data_type }}</p> -->
+        <button class="snap" @click="takePicture">SCAN</button>
     </div>
 </template>
 
@@ -23,12 +20,8 @@ import { mapGetters } from 'vuex';
 export default {
     
     name: "camera",
-    // props:{
-    //     title:String,
-    // },
     data() {
         return {
-            // isLoading: false,
             fullPage: true
         }
     },
@@ -40,19 +33,6 @@ export default {
             if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
 
                 let constraints = {
-
-                    // video: {
-                    //     width: {
-                    //         min: 1280,
-                    //         ideal: 1920,
-                    //         max: 2560,
-                    //     },
-                    //     height: {
-                    //         min: 720,
-                    //         ideal: 1080,
-                    //         max: 1440,
-                    //     },
-                    // },
 
                     video: {
                         width: {
@@ -84,11 +64,6 @@ export default {
         takePicture(){
             console.log("taking pic here");
             console.log("take picture");
-            // this.isLoading = true;
-            //     // simulate AJAX
-            //     setTimeout(() => {
-            //       this.isLoading = false
-            //     },5000)
             let ratio = (window.innerHeight < window.innerWidth) ? 16 / 11 : 11 / 16;  
             const picture = document.querySelector("canvas");
             picture.width = (window.innerWidth < 1280) ? window.innerWidth : 1280;
@@ -115,46 +90,46 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.camera {
-    width: 100vw;
-    height: 100vh;
-    padding: 25px;
-    box-sizing: border-box;
+// <style lang="scss" scoped>
+// .camera {
+//     width: 100vw;
+//     height: 100vh;
+//     padding: 25px;
+//     box-sizing: border-box;
     
     
-    .feed {
-        display: black;
-        width: 100%;
-        max-width:1280px;
+//     .feed {
+//         display: black;
+//         width: 100%;
+//         max-width:1280px;
 
-        margin: 0 auto;
+//         margin: 0 auto;
 
-        background-color: #171717;
-        box-shadow: 6px 6px 12px 8px rgba(0, 0, 0, 0.35); 
-    }
+//         background-color: #171717;
+//         box-shadow: 6px 6px 12px 8px rgba(0, 0, 0, 0.35); 
+//     }
 
-    .snap {
-        display: block;
-        width: 75px;
-        height: 75px;
-        border-radius: 50%;
+//     .snap {
+//         display: block;
+//         width: 75px;
+//         height: 75px;
+//         border-radius: 50%;
 
-        margin: 25px auto;
+//         margin: 25px auto;
 
-        background-color: transparentize($color: #ffce00, $amount: 0.5);
-        border: 1px solid #171717;
-        outline: none;
+//         background-color: transparentize($color: #ffce00, $amount: 0.5);
+//         border: 1px solid #171717;
+//         outline: none;
 
-        cursor: pointer;
+//         cursor: pointer;
 
-        &:hover {
-            background-color: #ffce00;
-        }
-        &:active {
-            background-color: darken($color: #ffce00, $amount: 10);
-        }
-    }
+//         &:hover {
+//             background-color: #ffce00;
+//         }
+//         &:active {
+//             background-color: darken($color: #ffce00, $amount: 10);
+//         }
+//     }
 
-}
-</style>
+// }
+// </style>
