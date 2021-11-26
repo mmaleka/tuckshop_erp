@@ -397,7 +397,6 @@ export default new Vuex.Store({
         })
           .then(res => {
             console.log(res.data);
-            alert("added")
             Vue.$toast.error("added", {
               timeout: 2000
             });
