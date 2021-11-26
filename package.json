@@ -33,7 +33,7 @@
     "vue-jwt-decode": "^0.1.0",
     "vue-loading-overlay": "^3.0.1",
     "vue-router": "^3.2.0",
-    "vue-toast-notification": "^2.0.1",
+    "vue-toast-notification": "^0.5.4",
     "vuetify": "^2.4.0",
     "vuex": "^3.4.0"
   },

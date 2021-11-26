@@ -151,9 +151,9 @@ export default new Vuex.Store({
           commit('loginSuccess', username)
           router.push('/');
           console.log("token: ", token);
-          // Vue.$toast.open("Login successful", {
-          //   timeout: 2000
-          // });
+          Vue.$toast.open("Login successful", {
+            timeout: 2000
+          });
         })
         .catch(err => {
           commit('loginFailure')
@@ -330,6 +330,9 @@ export default new Vuex.Store({
           .catch(err => {
             console.error(err)
             // alert(err)
+            Vue.$toast.error(err.response.data, {
+              timeout: 2000
+            });
           });
       }
       
@@ -358,16 +361,23 @@ export default new Vuex.Store({
           this.state.barcode_success = res_decodebarcodeimage.data['success'];
           this.state.barcode_data = barcode_info;
           if (this.state.barcode_data == "no detection") {
-            alert("no detection, try again")
+            Vue.$toast.error("no detection, try again", {
+              timeout: 2000
+            });
           } else {
             this.dispatch('GetBarcodeData', { barcode_info });
+            Vue.$toast.error(this.state.barcode_data, {
+              timeout: 2000
+            });
           }
           
           
         })
         .catch(err => {
           console.error(err)
-          alert(err)
+          Vue.$toast.error(err.response.data, {
+            timeout: 2000
+          });
           this.state.isLoading = false;
         });
 
@@ -388,6 +398,9 @@ export default new Vuex.Store({
           .then(res => {
             console.log(res.data);
             alert("added")
+            Vue.$toast.error("added", {
+              timeout: 2000
+            });
           })
           .catch(err => {
             console.error(err)
@@ -402,7 +415,10 @@ export default new Vuex.Store({
         })
           .then(res => {
             console.log(res.data);
-            alert("updated")
+            // alert("updated")
+            Vue.$toast.error("updated", {
+              timeout: 2000
+            });
           })
           .catch(err => {
             console.error(err)
