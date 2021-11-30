@@ -182,7 +182,9 @@ export default {
     onDetected(data) {
           this.data = data
           this.resultcode = data.codeResult.code + ' - ' + data.codeResult.startInfo.error
-          this.$store.commit('updateBarcode', data.codeResult.code)
+          const barcode_result = data.codeResult.code
+          this.$store.commit('updateBarcode', barcode_result)
+          this.$store.dispatch('CheckBarcodedata', { barcode_result })
           if (this.foundCodes.has(data.codeResult.code)) {
             var val = this.foundCodes.get(data.codeResult.code);
             val++;

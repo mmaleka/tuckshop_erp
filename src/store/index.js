@@ -287,6 +287,7 @@ export default new Vuex.Store({
     },
 
     async GetBarcodeData({ commit }, barcode_info) {
+      console.log("get barcode data");
       console.log(barcode_info, commit);
       // barcode_info = String(0765756931182);
       const url_get_barcode = this.state.endpoints.baseURL2 + 'api-tuckshoppos/checkitem/?barcode_search=' + this.state.barcode_data
@@ -339,6 +340,25 @@ export default new Vuex.Store({
           });
       }
       
+
+    },
+
+    async CheckBarcodedata({ commit }, barcode_result) {
+      console.log("check barcode data: ", barcode_result);
+      console.log("commit: ", commit);
+      this.dispatch('ResetBarcodedata');
+      this.state.isLoading = false;
+      this.dispatch('GetBarcodeData', { barcode_result });
+
+    },
+
+    async ResetBarcodedata({ commit }) {
+      console.log("commit: ", commit);
+      this.state.barcode_data = '';
+      this.state.itemdescription = '';
+      this.state.stockitemquantity = 0;
+      this.state.price = 0;
+      this.state.isLoading = true;
 
     },
 
