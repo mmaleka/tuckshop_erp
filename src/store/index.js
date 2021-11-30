@@ -346,7 +346,7 @@ export default new Vuex.Store({
     async CheckBarcodedata({ commit }, barcode_result) {
       console.log("check barcode data: ", barcode_result);
       console.log("commit: ", commit);
-      this.dispatch('ResetBarcodedata');
+      // this.dispatch('ResetBarcodedata');
       this.state.isLoading = false;
       this.dispatch('GetBarcodeData', { barcode_result });
 
