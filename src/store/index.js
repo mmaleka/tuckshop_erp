@@ -112,6 +112,9 @@ export default new Vuex.Store({
     updateisLoading(state, value) {
       state.isLoading = value
     },
+    updateBarcode(state, value) {
+      state.barcode_data = value
+    } 
 
 
   },

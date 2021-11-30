@@ -21,7 +21,7 @@
         Stop
       </v-btn>
     </v-row>
-    <BR/> <span>{{resultcode}}</span> 
+    <!-- <BR/> <span>{{resultcode}}</span> -->
     
     <div ref="quagga" class="camera"/>
   </div>
@@ -182,6 +182,7 @@ export default {
     onDetected(data) {
           this.data = data
           this.resultcode = data.codeResult.code + ' - ' + data.codeResult.startInfo.error
+          this.$store.commit('updateBarcode', data.codeResult.code)
           if (this.foundCodes.has(data.codeResult.code)) {
             var val = this.foundCodes.get(data.codeResult.code);
             val++;
