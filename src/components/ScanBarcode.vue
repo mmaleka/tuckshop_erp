@@ -2,18 +2,28 @@
 <div>
 
   <div class="scanner_wrapper">
-    <button @click="stop">Stop</button>
-    <BR/><BR/> <span>{{resultCodeInfo}}</span>
+    <v-row
+      align="center"
+      justify="space-around"
+    >
+      <v-btn
+        depressed
+        color="primary"
+        @click="startScanner"
+      >
+        Start
+      </v-btn>
+      <v-btn
+        depressed
+        color="error"
+        @click="stop"
+      >
+        Stop
+      </v-btn>
+    </v-row>
     <BR/> <span>{{resultcode}}</span> 
-
-    <BR/> <span>{{foundCodes}}</span>
-
-     
     
     <div ref="quagga" class="camera"/>
-    <pre v-if="data">
-      {{ data }}
-    </pre>
   </div>
 
 
@@ -39,8 +49,20 @@ export default {
           type : "LiveStream",
           target: this.$refs.quagga,
            constraints: {
-            width: {min: 640},
-            height: {min: 1200}, //1200
+            width: {min: 640}, //640
+            height: {min: 480}, //1200
+
+            // width: {
+            //     min: 1500,
+            //     ideal: 3600,
+            //     max: 3600,
+            // },
+            // height: {
+            //     min: 2000,
+            //     ideal: 2600,
+            //     max: 2600,
+            // },
+
             aspectRatio: {min: 1, max: 2},
             deviceId: 0,
             facingMode: "environment",
@@ -92,6 +114,71 @@ export default {
       //this.getCodeInfo('46020480032')
      
     },
+
+    startScanner() {
+      Quagga.init({
+          inputStream : {
+          name : "Live",
+          type : "LiveStream",
+          target: this.$refs.quagga,
+           constraints: {
+            width: {min: 640}, //640
+            height: {min: 480}, //1200
+
+            // width: {
+            //     min: 1500,
+            //     ideal: 3600,
+            //     max: 3600,
+            // },
+            // height: {
+            //     min: 2000,
+            //     ideal: 2600,
+            //     max: 2600,
+            // },
+
+            aspectRatio: {min: 1, max: 2},
+            deviceId: 0,
+            facingMode: "environment",
+            },
+            area: {
+                top: "0%",
+                right: "0%",
+                left: "0%",
+                bottom: "0%",
+            },
+         
+        },
+        debug: true,
+        locator: {
+          halfSample: true,
+          patchSize: "medium", // x-small, small, medium, large, x-large
+          debug: {
+            showCanvas: true,
+            showPatches: true,
+            showFoundPatches: true,
+            showSkeleton: true,
+            showLabels: true,
+            showPatchLabels: true,
+            showRemainingPatchLabels: true,
+            boxFromPatches: {
+              showTransformed: true,
+              showTransformedBox: true,
+              showBB: true
+            }
+          }
+        },
+  
+            locate: true,
+
+        decoder : {
+          readers : ["ean_reader"],
+          
+        },
+         
+      },
+      () => this.start())
+    },
+
     onDetected(data) {
           this.data = data
           this.resultcode = data.codeResult.code + ' - ' + data.codeResult.startInfo.error
@@ -103,11 +190,12 @@ export default {
           this.getCodeInfo(data.codeResult.code)
     },
     stop() {
-      this.getfoundCodes();
+      console.log('Quagga stopped!')
+      // this.getfoundCodes();
       Quagga.offDetected(this.onDetected)
       Quagga.stop()
-      this.$refs.quagga.querySelector('video').remove()
-      this.$refs.quagga.querySelector('canvas').remove()
+      // this.$refs.quagga.querySelector('video').remove()
+      // this.$refs.quagga.querySelector('canvas').remove()
       },
     getCodeInfo(code) {
         var getinfoflag = false;       
@@ -158,7 +246,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .scanner-wrapper {
   width: 600px;
   border-left: 1px solid grey;
@@ -169,7 +257,8 @@ export default {
   
   max-width: 640px;
   max-height: 480px;
-  display: block;
+  display: none;
 
 }
+
 </style>
