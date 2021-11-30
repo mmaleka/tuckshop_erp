@@ -39,8 +39,8 @@ export default {
           type : "LiveStream",
           target: this.$refs.quagga,
            constraints: {
-            width: {min: 1920},
-            height: {min: 1920}, //1200
+            width: {min: 640},
+            height: {min: 1200}, //1200
             aspectRatio: {min: 1, max: 2},
             deviceId: 0,
             facingMode: "environment",
