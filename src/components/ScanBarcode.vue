@@ -22,6 +22,11 @@
       </v-btn>
     </v-row>
     <!-- <BR/> <span>{{resultcode}}</span> -->
+
+    <loading :active.sync="isLoading" 
+    :can-cancel="true" 
+    :on-cancel="onCancel"
+    :is-full-page="fullPage"></loading>
     
     <div ref="quagga" class="camera"/>
   </div>
@@ -31,6 +36,12 @@
 </template>
 
 <script>
+
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+import { mapGetters } from 'vuex';
+
 import Quagga from 'quagga';
 import axios from 'axios';
 export default {
@@ -38,8 +49,13 @@ export default {
     data: null, 
     resultcode: "-",
     resultCodeInfo: "-",
-    foundCodes: new Map()
+    foundCodes: new Map(),
+    fullPage: true
     }),
+
+  components: {
+      Loading
+  },
  
   mounted () {
     this.$nextTick(() => {
@@ -107,15 +123,19 @@ export default {
     })
   },
   methods: {
-    start() { 
+    start() {
       Quagga.onDetected(this.onDetected)
       Quagga.start() 
       console.log('Quagga started!')
       //this.getCodeInfo('46020480032')
-     
+    },
+
+    onCancel() {
+      console.log('User cancelled the loader.')
     },
 
     startScanner() {
+      this.$store.dispatch('ResetBarcodedata');
       Quagga.init({
           inputStream : {
           name : "Live",
@@ -244,7 +264,10 @@ export default {
                 
       },
 
-  }
+  },
+  computed: {
+      ...mapGetters(['isLoading'])
+  },
 
 }
 </script>

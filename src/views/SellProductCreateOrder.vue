@@ -1,8 +1,9 @@
 <template>
   <div class="home">
     <MyNav />
-    <Camera />
-    <BarcodeImage />
+    <ScanBarcode />
+    <!-- <Camera /> -->
+    <!-- <BarcodeImage /> -->
     <SellProductForm />
   </div>
 </template>
@@ -10,9 +11,10 @@
 <script>
 // @ is an alias to /src
 import MyNav from '@/components/MyNav.vue';
-import Camera from '@/components/Camera.vue';
-import BarcodeImage from '@/components/BarcodeImage.vue';
+// import Camera from '@/components/Camera.vue';
+// import BarcodeImage from '@/components/BarcodeImage.vue';
 import SellProductForm from '@/components/SellProductForm.vue';
+import ScanBarcode from '@/components/ScanBarcode';
 
 import { mapGetters } from 'vuex';
  
@@ -20,8 +22,9 @@ export default {
   name: 'Home',
   components: {
     MyNav,
-    Camera,
-    BarcodeImage,
+    ScanBarcode,
+    // Camera,
+    // BarcodeImage,
     SellProductForm,
   },
   methods: {

@@ -354,6 +354,7 @@ export default new Vuex.Store({
 
     async ResetBarcodedata({ commit }) {
       console.log("commit: ", commit);
+      console.log("ResetBarcodedata....");
       this.state.barcode_data = '';
       this.state.itemdescription = '';
       this.state.stockitemquantity = 0;

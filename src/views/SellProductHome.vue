@@ -4,6 +4,7 @@
     <OrderList />
     <!-- <Camera />
     <BarcodeImage /> -->
+    
   </div>
 </template>
 
