@@ -5,6 +5,7 @@
     <v-row
       align="center"
       justify="space-around"
+      class="pa-4"
     >
       <v-btn
         depressed
@@ -28,7 +29,7 @@
     :on-cancel="onCancel"
     :is-full-page="fullPage"></loading>
     
-    <div ref="quagga" class="camera"/>
+    <div ref="quagga" class="camera" />
   </div>
 
 
@@ -58,69 +59,69 @@ export default {
   },
  
   mounted () {
-    this.$nextTick(() => {
-      Quagga.init({
-          inputStream : {
-          name : "Live",
-          type : "LiveStream",
-          target: this.$refs.quagga,
-           constraints: {
-            width: {min: 640}, //640
-            height: {min: 480}, //1200
+    // this.$nextTick(() => {
+    //   Quagga.init({
+    //       inputStream : {
+    //       name : "Live",
+    //       type : "LiveStream",
+    //       target: this.$refs.quagga,
+    //        constraints: {
+    //         width: {min: 640}, //640
+    //         height: {min: 480}, //1200
 
-            // width: {
-            //     min: 1500,
-            //     ideal: 3600,
-            //     max: 3600,
-            // },
-            // height: {
-            //     min: 2000,
-            //     ideal: 2600,
-            //     max: 2600,
-            // },
+    //         // width: {
+    //         //     min: 1500,
+    //         //     ideal: 3600,
+    //         //     max: 3600,
+    //         // },
+    //         // height: {
+    //         //     min: 2000,
+    //         //     ideal: 2600,
+    //         //     max: 2600,
+    //         // },
 
-            aspectRatio: {min: 1, max: 2},
-            deviceId: 0,
-            facingMode: "environment",
-            },
-            area: {
-                top: "0%",
-                right: "0%",
-                left: "0%",
-                bottom: "0%",
-            },
+    //         aspectRatio: {min: 1, max: 2},
+    //         deviceId: 0,
+    //         facingMode: "environment",
+    //         },
+    //         area: {
+    //             top: "0%",
+    //             right: "0%",
+    //             left: "0%",
+    //             bottom: "0%",
+    //         },
          
-        },
-        debug: true,
-        locator: {
-          halfSample: true,
-          patchSize: "medium", // x-small, small, medium, large, x-large
-          debug: {
-            showCanvas: true,
-            showPatches: true,
-            showFoundPatches: true,
-            showSkeleton: true,
-            showLabels: true,
-            showPatchLabels: true,
-            showRemainingPatchLabels: true,
-            boxFromPatches: {
-              showTransformed: true,
-              showTransformedBox: true,
-              showBB: true
-            }
-          }
-        },
+    //     },
+    //     debug: true,
+    //     locator: {
+    //       halfSample: true,
+    //       patchSize: "medium", // x-small, small, medium, large, x-large
+    //       debug: {
+    //         showCanvas: true,
+    //         showPatches: true,
+    //         showFoundPatches: true,
+    //         showSkeleton: true,
+    //         showLabels: true,
+    //         showPatchLabels: true,
+    //         showRemainingPatchLabels: true,
+    //         boxFromPatches: {
+    //           showTransformed: true,
+    //           showTransformedBox: true,
+    //           showBB: true
+    //         }
+    //       }
+    //     },
   
-            locate: true,
+    //         locate: true,
 
-        decoder : {
-          readers : ["ean_reader"],
+    //     decoder : {
+    //       readers : ["ean_reader"],
           
-        },
+    //     },
          
-      },
-      () => this.start())
-    })
+    //   },
+    //   () => this.start())
+    // })
   },
   methods: {
     start() {
@@ -142,19 +143,19 @@ export default {
           type : "LiveStream",
           target: this.$refs.quagga,
            constraints: {
-            width: {min: 640}, //640
-            height: {min: 480}, //1200
+            // width: {min: 640}, //640
+            // height: {min: 480}, //1200
 
-            // width: {
-            //     min: 1500,
-            //     ideal: 3600,
-            //     max: 3600,
-            // },
-            // height: {
-            //     min: 2000,
-            //     ideal: 2600,
-            //     max: 2600,
-            // },
+            width: {
+                min: 1500,
+                ideal: 3600,
+                max: 3600,
+            },
+            height: {
+                min: 2000,
+                ideal: 2600,
+                max: 2600,
+            },
 
             aspectRatio: {min: 1, max: 2},
             deviceId: 0,
@@ -191,7 +192,7 @@ export default {
             locate: true,
 
         decoder : {
-          readers : ["ean_reader"],
+          readers: ["ean_reader"]
           
         },
          
@@ -202,9 +203,13 @@ export default {
     onDetected(data) {
           this.data = data
           this.resultcode = data.codeResult.code + ' - ' + data.codeResult.startInfo.error
-          const barcode_result = data.codeResult.code
-          this.$store.commit('updateBarcode', barcode_result)
-          this.$store.dispatch('CheckBarcodedata', { barcode_result })
+          console.log("data.codeResult.startInfo.error: ", data.codeResult.startInfo.error);
+          if (data.codeResult.startInfo.error <= 0.5) {
+            const barcode_result = data.codeResult.code
+            this.$store.commit('updateBarcode', barcode_result)
+            this.$store.dispatch('CheckBarcodedata', { barcode_result })
+          }
+          
           if (this.foundCodes.has(data.codeResult.code)) {
             var val = this.foundCodes.get(data.codeResult.code);
             val++;
@@ -281,8 +286,7 @@ export default {
 .camera {
   border: 1px solid red;
   
-  max-width: 640px;
-  max-height: 480px;
+  width: 100%;
   display: none;
 
 }
