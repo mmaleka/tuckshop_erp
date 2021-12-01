@@ -204,7 +204,7 @@ export default {
           this.data = data
           this.resultcode = data.codeResult.code + ' - ' + data.codeResult.startInfo.error
           console.log("data.codeResult.startInfo.error: ", data.codeResult.startInfo.error);
-          if (data.codeResult.startInfo.error <= 1.5) {
+          if (data.codeResult.startInfo.error <= 0.5) {
             const barcode_result = data.codeResult.code
             this.$store.commit('updateBarcode', barcode_result)
             this.$store.dispatch('CheckBarcodedata', { barcode_result })
@@ -287,7 +287,7 @@ export default {
   border: 1px solid red;
   
   width: 100%;
-  display: block;
+  display: none;
 
 }
 
