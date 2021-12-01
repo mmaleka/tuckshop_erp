@@ -287,7 +287,7 @@ export default {
   border: 1px solid red;
   
   width: 100%;
-  display: none;
+  display: block;
 
 }
 
