@@ -143,19 +143,19 @@ export default {
           type : "LiveStream",
           target: this.$refs.quagga,
            constraints: {
-            // width: {min: 640}, //640
-            // height: {min: 480}, //1200
+            width: {min: 640}, //640
+            height: {min: 480}, //1200
 
-            width: {
-                min: 640,
-                ideal: 1000,
-                max: 1000,
-            },
-            height: {
-                min: 1200,
-                ideal: 1500,
-                max: 1500,
-            },
+            // width: {
+            //     min: 640,
+            //     ideal: 1000,
+            //     max: 1000,
+            // },
+            // height: {
+            //     min: 1200,
+            //     ideal: 1500,
+            //     max: 1500,
+            // },
 
             aspectRatio: {min: 1, max: 2},
             deviceId: 0,
@@ -204,7 +204,7 @@ export default {
           this.data = data
           this.resultcode = data.codeResult.code + ' - ' + data.codeResult.startInfo.error
           console.log("data.codeResult.startInfo.error: ", data.codeResult.startInfo.error);
-          if (data.codeResult.startInfo.error <= 0.5) {
+          if (data.codeResult.startInfo.error <= 10) {
             const barcode_result = data.codeResult.code
             this.$store.commit('updateBarcode', barcode_result)
             this.$store.dispatch('CheckBarcodedata', { barcode_result })
