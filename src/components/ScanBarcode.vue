@@ -143,8 +143,11 @@ export default {
           type : "LiveStream",
           target: this.$refs.quagga,
            constraints: {
+            // width: {min: 640}, //640
+            // height: {min: 480}, //1200
+
             width: {min: 640}, //640
-            height: {min: 480}, //1200
+            height: {min: 1200}, //1200
 
             // width: {
             //     min: 640,
