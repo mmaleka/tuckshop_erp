@@ -147,14 +147,14 @@ export default {
             // height: {min: 480}, //1200
 
             width: {
-                min: 640,
-                ideal: 1000,
-                max: 1000,
+                min: 1500,
+                ideal: 3600,
+                max: 3600,
             },
             height: {
-                min: 1200,
-                ideal: 1500,
-                max: 1500,
+                min: 2000,
+                ideal: 2600,
+                max: 2600,
             },
 
             aspectRatio: {min: 1, max: 2},
