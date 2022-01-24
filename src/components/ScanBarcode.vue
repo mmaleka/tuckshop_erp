@@ -59,69 +59,69 @@ export default {
   },
  
   mounted () {
-    // this.$nextTick(() => {
-    //   Quagga.init({
-    //       inputStream : {
-    //       name : "Live",
-    //       type : "LiveStream",
-    //       target: this.$refs.quagga,
-    //        constraints: {
-    //         width: {min: 640}, //640
-    //         height: {min: 480}, //1200
+    this.$nextTick(() => {
+      Quagga.init({
+          inputStream : {
+          name : "Live",
+          type : "LiveStream",
+          target: this.$refs.quagga,
+           constraints: {
+            width: {min: 640}, //640
+            height: {min: 480}, //1200
 
-    //         // width: {
-    //         //     min: 1500,
-    //         //     ideal: 3600,
-    //         //     max: 3600,
-    //         // },
-    //         // height: {
-    //         //     min: 2000,
-    //         //     ideal: 2600,
-    //         //     max: 2600,
-    //         // },
+            // width: {
+            //     min: 1500,
+            //     ideal: 3600,
+            //     max: 3600,
+            // },
+            // height: {
+            //     min: 2000,
+            //     ideal: 2600,
+            //     max: 2600,
+            // },
 
-    //         aspectRatio: {min: 1, max: 2},
-    //         deviceId: 0,
-    //         facingMode: "environment",
-    //         },
-    //         area: {
-    //             top: "0%",
-    //             right: "0%",
-    //             left: "0%",
-    //             bottom: "0%",
-    //         },
+            aspectRatio: {min: 1, max: 2},
+            deviceId: 0,
+            facingMode: "environment",
+            },
+            area: {
+                top: "0%",
+                right: "0%",
+                left: "0%",
+                bottom: "0%",
+            },
          
-    //     },
-    //     debug: true,
-    //     locator: {
-    //       halfSample: true,
-    //       patchSize: "medium", // x-small, small, medium, large, x-large
-    //       debug: {
-    //         showCanvas: true,
-    //         showPatches: true,
-    //         showFoundPatches: true,
-    //         showSkeleton: true,
-    //         showLabels: true,
-    //         showPatchLabels: true,
-    //         showRemainingPatchLabels: true,
-    //         boxFromPatches: {
-    //           showTransformed: true,
-    //           showTransformedBox: true,
-    //           showBB: true
-    //         }
-    //       }
-    //     },
+        },
+        debug: true,
+        locator: {
+          halfSample: true,
+          patchSize: "medium", // x-small, small, medium, large, x-large
+          debug: {
+            showCanvas: true,
+            showPatches: true,
+            showFoundPatches: true,
+            showSkeleton: true,
+            showLabels: true,
+            showPatchLabels: true,
+            showRemainingPatchLabels: true,
+            boxFromPatches: {
+              showTransformed: true,
+              showTransformedBox: true,
+              showBB: true
+            }
+          }
+        },
   
-    //         locate: true,
+            locate: true,
 
-    //     decoder : {
-    //       readers : ["ean_reader"],
+        decoder : {
+          readers : ["ean_reader"],
           
-    //     },
+        },
          
-    //   },
-    //   () => this.start())
-    // })
+      },
+      () => this.start())
+    })
   },
   methods: {
     start() {

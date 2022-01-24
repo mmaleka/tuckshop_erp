@@ -7,7 +7,7 @@
         :is-full-page="fullPage"></loading>
         
         <video autoplay class="feed"></video>
-        <button class="snap" @click="takePicture">SCAN</button>
+        <button class="snap" @click="takePicture">SCAN THIS</button>
     </div>
 </template>
 
@@ -30,32 +30,38 @@ export default {
     },
     methods: {
         init () {
+            console.log("step 1...");
             if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+                console.log("step 2...");
 
                 let constraints = {
-
                     video: {
+                        // width: {min: 640}, //640
+                        // height: {min: 1200}, //1200
                         width: {
-                            min: 1500,
-                            ideal: 3600,
-                            max: 3600,
+                            min: 100,
+                            ideal: 100,
+                            max: 100,
                         },
                         height: {
                             min: 2000,
                             ideal: 2600,
                             max: 2600,
                         },
-                        facingMode: {
-                            exact: 'environment'
-                        },
+                        facingMode: "environment",
+                        // facingMode: {
+                        //     exact: 'environment'
+                        // },
                     },
                     
                 }
+                console.log("step 3...");
 
                 navigator.mediaDevices.getUserMedia(constraints).then(stream => {
                     const videoPlayer = document.querySelector("video");
                     videoPlayer.srcObject = stream;
                     videoPlayer.play();
+                    console.log("---****----");
                 })
             } else {
                 alert("cannot get media Devices")
