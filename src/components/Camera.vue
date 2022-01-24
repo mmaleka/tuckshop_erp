@@ -39,9 +39,9 @@ export default {
                         // width: {min: 640}, //640
                         // height: {min: 1200}, //1200
                         width: {
-                            min: 100,
-                            ideal: 100,
-                            max: 100,
+                            min: 1500,
+                            ideal: 2500,
+                            max: 2500,
                         },
                         height: {
                             min: 2000,
