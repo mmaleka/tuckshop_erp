@@ -40,6 +40,7 @@ export default new Vuex.Store({
     barcode_data_type: '',
     new_order_id: '',
     isLoading: false,
+    isOpen: true,
   },
   mutations: {
     updateToken(state, newToken) {
@@ -137,6 +138,7 @@ export default new Vuex.Store({
     barcode_data_type: state => state.barcode_data_type,
     new_order_id: state => state.new_order_id,
     isLoading: state => state.isLoading,
+    isOpen: state => state.isOpen,
   },
   actions: {
     obtainToken({ commit }, user) {
@@ -371,6 +373,7 @@ export default new Vuex.Store({
       this.state.stockitemquantity = 0;
       this.state.price = 0;
       this.state.isLoading = true;
+      this.state.isOpen = false;
 
       alert(this.state.endpoints.baseURL2);
       const url = this.state.endpoints.baseURL2 + 'api-barcodedetection/barcodedetection/'
@@ -379,11 +382,12 @@ export default new Vuex.Store({
           image_bytes: barcode_data.imageFileData,
         })
         .then(res_decodebarcodeimage => {
-          alert("dgdfgdfg")
+          alert("finished talking to api")
           console.log(res_decodebarcodeimage.data['success']);
           console.log(res_decodebarcodeimage.data['barcode']);
           let barcode_info = res_decodebarcodeimage.data['barcode']
           this.state.isLoading = false;
+          this.state.isOpen = true;
 
           this.state.barcode_success = res_decodebarcodeimage.data['success'];
           this.state.barcode_data = barcode_info;
