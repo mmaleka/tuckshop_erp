@@ -87,6 +87,7 @@ export default {
                     const imageFileData = picture.toDataURL('image/jpeg', 1);
                     this.$store.dispatch('SendBarcodeImage', { imageFileData })
                 }
+                console.log("---vvv---");
             }
         },
         onCancel() {
