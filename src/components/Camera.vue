@@ -69,7 +69,7 @@ export default {
         },
         startscan(){
             console.log("take...");
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 10; i++) {
                 console.log("i: ", i);  
                 console.log("isOpen: ", this.$store.state.isOpen);
                 if (this.$store.state.isOpen==false) {
