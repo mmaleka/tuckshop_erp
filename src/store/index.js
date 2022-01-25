@@ -40,7 +40,7 @@ export default new Vuex.Store({
     barcode_data_type: '',
     new_order_id: '',
     isLoading: false,
-    isOpen: true,
+    isOpen: false,
   },
   mutations: {
     updateToken(state, newToken) {
@@ -387,7 +387,7 @@ export default new Vuex.Store({
           console.log(res_decodebarcodeimage.data['barcode']);
           let barcode_info = res_decodebarcodeimage.data['barcode']
           this.state.isLoading = false;
-          this.state.isOpen = true;
+          
 
           this.state.barcode_success = res_decodebarcodeimage.data['success'];
           this.state.barcode_data = barcode_info;
@@ -396,6 +396,7 @@ export default new Vuex.Store({
               timeout: 2000
             });
           } else {
+            this.state.isOpen = true;
             // this.dispatch('GetBarcodeData', { barcode_info });
             Vue.$toast.error(this.state.barcode_data, {
               timeout: 2000
