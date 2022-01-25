@@ -375,16 +375,16 @@ export default new Vuex.Store({
       this.state.isLoading = true;
       this.state.isOpen = false;
 
-      alert(this.state.endpoints.baseURL2);
+      // alert(this.state.endpoints.baseURL2);
       const url = this.state.endpoints.baseURL2 + 'api-barcodedetection/barcodedetection/'
-      alert("---***---")
+      // alert("---***---")
       axios.post(url, {
           image_bytes: barcode_data.imageFileData,
         })
         .then(res_decodebarcodeimage => {
-          alert("finished talking to api")
-          console.log(res_decodebarcodeimage.data['success']);
-          console.log(res_decodebarcodeimage.data['barcode']);
+          // alert("finished talking to api")
+          // console.log(res_decodebarcodeimage.data['success']);
+          // console.log(res_decodebarcodeimage.data['barcode']);
           let barcode_info = res_decodebarcodeimage.data['barcode']
           this.state.isLoading = false;
           
