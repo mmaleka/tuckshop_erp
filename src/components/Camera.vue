@@ -68,15 +68,20 @@ export default {
             }
         },
         startscan(){
-            for (let i = 0; i < 5; i++) {
-                console.log("i: ", i);  
-                console.log("take...");
-                console.log("isOpen: ", this.$store.state.isOpen);
-                if (this.$store.state.isOpen==false) {
-                    this.takePicture()
-                }
-                console.log("---vvv---");
+            console.log("take...");
+            while (this.$store.state.isOpen==false) {
+                console.log();
+                this.takePicture()
             }
+            // for (let i = 0; i < 5; i++) {
+            //     console.log("i: ", i);  
+            //     console.log("take...");
+            //     console.log("isOpen: ", this.$store.state.isOpen);
+            //     if (this.$store.state.isOpen==false) {
+            //         this.takePicture()
+            //     }
+            //     console.log("---vvv---");
+            // }
         },
         takePicture(){
             console.log("taking pic");

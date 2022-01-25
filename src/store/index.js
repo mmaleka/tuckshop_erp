@@ -373,7 +373,7 @@ export default new Vuex.Store({
       this.state.stockitemquantity = 0;
       this.state.price = 0;
       this.state.isLoading = true;
-      this.state.isOpen = false;
+      this.state.isOpen = true;
 
       // alert(this.state.endpoints.baseURL2);
       const url = this.state.endpoints.baseURL2 + 'api-barcodedetection/barcodedetection/'
@@ -396,7 +396,7 @@ export default new Vuex.Store({
               timeout: 2000
             });
           } else {
-            this.state.isOpen = true;
+            // this.state.isOpen = true;
             // this.dispatch('GetBarcodeData', { barcode_info });
             Vue.$toast.error(this.state.barcode_data, {
               timeout: 2000
