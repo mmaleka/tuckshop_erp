@@ -392,7 +392,7 @@ export default new Vuex.Store({
               timeout: 2000
             });
           } else {
-            this.dispatch('GetBarcodeData', { barcode_info });
+            // this.dispatch('GetBarcodeData', { barcode_info });
             Vue.$toast.error(this.state.barcode_data, {
               timeout: 2000
             });
