@@ -366,18 +366,22 @@ export default new Vuex.Store({
     },
 
 
-    SendBarcodeImage({ commit }, barcode_data) {
+    async SendBarcodeImage({ commit }, barcode_data) {
       console.log("commit: ", commit, barcode_data);
       this.state.barcode_data = '';
       this.state.itemdescription = '';
       this.state.stockitemquantity = 0;
       this.state.price = 0;
       this.state.isLoading = true;
-      this.state.isOpen = true;
+      // this.state.isOpen = true;
 
-      // alert(this.state.endpoints.baseURL2);
-      // const url = this.state.endpoints.baseURL2 + 'api-barcodedetection/barcodedetection/'
+      const url = this.state.endpoints.baseURL2 + 'api-barcodedetection/barcodedetection/'
       // alert("---***---")
+      const res_barcodeData = await axios.get(url)
+      console.log("res_barcodeData: ", res_barcodeData);
+
+
+
       // axios.post(url, {
       //     image_bytes: barcode_data.imageFileData,
       //   })
@@ -387,8 +391,6 @@ export default new Vuex.Store({
       //     // console.log(res_decodebarcodeimage.data['barcode']);
       //     let barcode_info = res_decodebarcodeimage.data['barcode']
       //     this.state.isLoading = false;
-          
-
       //     this.state.barcode_success = res_decodebarcodeimage.data['success'];
       //     this.state.barcode_data = barcode_info;
       //     if (this.state.barcode_data == "no detection") {
@@ -402,18 +404,20 @@ export default new Vuex.Store({
       //         timeout: 2000
       //       });
       //     }
-          
-          
       //   })
       //   .catch(err => {
       //     console.error(err)
-      //     alert("====>>>>====")
-      //     alert(err)
+      //     // alert("====>>>>====")
+      //     // alert(err)
       //     Vue.$toast.error(err.response.data, {
       //       timeout: 2000
       //     });
       //     this.state.isLoading = false;
       //   });
+      // // this.state.isLoading = false;
+
+
+
 
     },
 

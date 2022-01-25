@@ -71,11 +71,10 @@ export default {
             console.log("take...");
             for (let i = 0; i < 5; i++) {
                 console.log("i: ", i);  
-                console.log("take...");
                 console.log("isOpen: ", this.$store.state.isOpen);
-                // if (this.$store.state.isOpen==false) {
-                //     this.takePicture()
-                // }
+                if (this.$store.state.isOpen==false) {
+                    this.takePicture()
+                }
                 console.log("---vvv---");
             }
         },
