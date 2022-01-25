@@ -22,11 +22,11 @@ export default {
     name: "camera",
     data() {
         return {
-            fullPage: true
+            fullPage: true,
         }
     },
     components: {
-        Loading
+        Loading,
     },
     methods: {
         init () {
@@ -69,19 +69,15 @@ export default {
         },
         startscan(){
             console.log("take...");
-            while (this.$store.state.isOpen==false) {
-                console.log("----jjjj----");
-                this.takePicture()
+            for (let i = 0; i < 5; i++) {
+                console.log("i: ", i);  
+                console.log("take...");
+                console.log("isOpen: ", this.$store.state.isOpen);
+                // if (this.$store.state.isOpen==false) {
+                //     this.takePicture()
+                // }
+                console.log("---vvv---");
             }
-            // for (let i = 0; i < 5; i++) {
-            //     console.log("i: ", i);  
-            //     console.log("take...");
-            //     console.log("isOpen: ", this.$store.state.isOpen);
-            //     if (this.$store.state.isOpen==false) {
-            //         this.takePicture()
-            //     }
-            //     console.log("---vvv---");
-            // }
         },
         takePicture(){
             console.log("taking pic");
