@@ -374,10 +374,12 @@ export default new Vuex.Store({
 
       alert(this.state.endpoints.baseURL2);
       const url = this.state.endpoints.baseURL2 + 'api-barcodedetection/barcodedetection/'
+      alert("---***---")
       axios.post(url, {
           image_bytes: barcode_data.imageFileData,
         })
         .then(res_decodebarcodeimage => {
+          alert("dgdfgdfg")
           console.log(res_decodebarcodeimage.data['success']);
           console.log(res_decodebarcodeimage.data['barcode']);
           let barcode_info = res_decodebarcodeimage.data['barcode']
@@ -400,6 +402,8 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.error(err)
+          alert("====>>>>====")
+          alert(err)
           Vue.$toast.error(err.response.data, {
             timeout: 2000
           });
