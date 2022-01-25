@@ -70,7 +70,7 @@ export default {
         startscan(){
             console.log("take...");
             while (this.$store.state.isOpen==false) {
-                console.log();
+                console.log("----jjjj----");
                 this.takePicture()
             }
             // for (let i = 0; i < 5; i++) {
