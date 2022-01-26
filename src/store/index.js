@@ -395,59 +395,58 @@ export default new Vuex.Store({
       this.state.isLoading = true;
       console.log("this.state.bacord_image_data: ", this.state.bacord_image_data);
       const url = this.state.endpoints.baseURL2 + 'api-barcodedetection/barcodedetection/'
-      var res_data = await axios.post(url, {image_bytes: this.state.bacord_image_data})
-      console.log("res_data: ", res_data);
-      // // alert("---***---")
-      // await axios.post(url, {
-      //     image_bytes: barcode_data.imageFileData,
-      //   })
-      //   .then(res_decodebarcodeimage => {
-      //     this.state.isOpen = true;
-      //     console.log(res_decodebarcodeimage.data['barcode']);
 
-      //     // // alert("finished talking to api")
-      //     // console.log(res_decodebarcodeimage.data['success']);
-      //     // console.log(res_decodebarcodeimage.data['barcode']);
-      //     // let barcode_info = res_decodebarcodeimage.data['barcode']
-      //     // this.state.isLoading = false;
-      //     // this.state.barcode_success = res_decodebarcodeimage.data['success'];
-      //     // this.state.barcode_data = barcode_info;
-      //     // if (this.state.barcode_data == "no detection") {
-      //     //   Vue.$toast.error("no detection, try again", {
-      //     //     timeout: 2000
-      //     //   });
-      //     // } else {
-      //     //   this.state.isOpen = true;
-      //     //   // this.dispatch('GetBarcodeData', { barcode_info });
-      //     //   Vue.$toast.error(this.state.barcode_data, {
-      //     //     timeout: 2000
-      //     //   });
-      //     // }
+      await axios.post(url, {
+        image_bytes: this.state.bacord_image_data,
+        })
+        .then(res_decodebarcodeimage => {
+          console.log(res_decodebarcodeimage.data['barcode']);
+          // console.log(res_decodebarcodeimage.data['success']);
+          this.state.isLoading = false;
+          this.state.barcode_success = res_decodebarcodeimage.data['success'];
+          this.state.barcode_data = res_decodebarcodeimage.data['barcode'];
+          // if (this.state.barcode_data == "no detection") {
+          //   Vue.$toast.error("no detection, try again", {
+          //     timeout: 2000
+          //   });
+          // } else {
+          //   this.state.isOpen = true;
+          //   // this.dispatch('GetBarcodeData', { barcode_info });
+          //   Vue.$toast.error(this.state.barcode_data, {
+          //     timeout: 2000
+          //   });
+          // }
 
-      //   })
-      //   .catch(err => {
-      //     console.error(err)
-      //     // alert("====>>>>====")
-      //     // alert(err)
-      //     Vue.$toast.error(err.response.data, {
-      //       timeout: 2000
-      //     });
-      //     this.state.isLoading = true;
-      //   });
-      this.state.isLoading = false;
+        })
+        .catch(err => {
+          console.error(err)
+          Vue.$toast.error(err.response.data, {
+            timeout: 2000
+          });
+          this.state.isLoading = true;
+        });
 
 
     },
 
   
     async scanBarcode(){
-      console.log("taking pic");
-
-      // const imageFileData = await this.dispatch('takePicture');
       await this.dispatch('takePicture');
       await this.dispatch('SendBarcodeImage');
-      // const response = await this.dispatch('SendBarcodeImage', { imageFileData });
-      
+      console.log("got my data");
+
+      if (this.state.barcode_data == "no detection") {
+        console.log("loop again until we find the data");
+        while (this.state.barcode_data == "no detection") {
+          await this.dispatch('takePicture');
+          await this.dispatch('SendBarcodeImage');
+        }
+      } else {
+        console.log("found my data");
+        Vue.$toast.error(this.state.barcode_data, {
+          timeout: 2000
+        });
+      }
     },
 
 

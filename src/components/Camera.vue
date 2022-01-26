@@ -30,10 +30,7 @@ export default {
     },
     methods: {
         init () {
-            console.log("step 1...");
             if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
-                console.log("step 2...");
-
                 let constraints = {
                     video: {
                         // width: {min: 640}, //640
@@ -55,8 +52,6 @@ export default {
                     },
                     
                 }
-                console.log("step 3...");
-
                 navigator.mediaDevices.getUserMedia(constraints).then(stream => {
                     const videoPlayer = document.querySelector("video");
                     videoPlayer.srcObject = stream;
@@ -68,7 +63,6 @@ export default {
             }
         },
         startscan(){
-            console.log("take...");
             this.$store.dispatch('scanBarcode')
         },
 
