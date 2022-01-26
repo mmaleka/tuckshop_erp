@@ -413,7 +413,7 @@ export default new Vuex.Store({
 
       if (this.state.barcode_data == "no detection") {
         console.log("loop again until we find the data");
-        let counter = 100;
+        let counter = 1000;
         while (this.state.barcode_data == "no detection") {
           if (counter > 0){
             console.log("counter: ", counter);
