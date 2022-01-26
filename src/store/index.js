@@ -364,9 +364,7 @@ export default new Vuex.Store({
       this.state.stockitemquantity = 0;
       this.state.price = 0;
       this.state.isLoading = true;
-
     },
-
 
     async takePicture(){
       let ratio = (window.innerHeight < window.innerWidth) ? 16 / 11 : 11 / 16;  
@@ -377,15 +375,9 @@ export default new Vuex.Store({
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
       ctx.drawImage(document.querySelector("video"), 0, 0, picture.width, picture.height)
-
-      const imageFileData = picture.toDataURL('image/jpeg', 1);
-      console.log("imageFileData: ", imageFileData);
       this.state.bacord_image_data = picture.toDataURL('image/jpeg', 1);
-      
     },
 
-
-    // async SendBarcodeImage({ commit }, barcode_data) {
     async SendBarcodeImage({ commit }) {
       console.log("commit: ", commit);
       this.state.barcode_data = '';
@@ -393,30 +385,15 @@ export default new Vuex.Store({
       this.state.stockitemquantity = 0;
       this.state.price = 0;
       this.state.isLoading = true;
-      console.log("this.state.bacord_image_data: ", this.state.bacord_image_data);
       const url = this.state.endpoints.baseURL2 + 'api-barcodedetection/barcodedetection/'
 
       await axios.post(url, {
         image_bytes: this.state.bacord_image_data,
         })
         .then(res_decodebarcodeimage => {
-          console.log(res_decodebarcodeimage.data['barcode']);
-          // console.log(res_decodebarcodeimage.data['success']);
           this.state.isLoading = false;
           this.state.barcode_success = res_decodebarcodeimage.data['success'];
           this.state.barcode_data = res_decodebarcodeimage.data['barcode'];
-          // if (this.state.barcode_data == "no detection") {
-          //   Vue.$toast.error("no detection, try again", {
-          //     timeout: 2000
-          //   });
-          // } else {
-          //   this.state.isOpen = true;
-          //   // this.dispatch('GetBarcodeData', { barcode_info });
-          //   Vue.$toast.error(this.state.barcode_data, {
-          //     timeout: 2000
-          //   });
-          // }
-
         })
         .catch(err => {
           console.error(err)
@@ -433,13 +410,25 @@ export default new Vuex.Store({
     async scanBarcode(){
       await this.dispatch('takePicture');
       await this.dispatch('SendBarcodeImage');
-      console.log("got my data");
 
       if (this.state.barcode_data == "no detection") {
         console.log("loop again until we find the data");
+        let counter = 100;
         while (this.state.barcode_data == "no detection") {
-          await this.dispatch('takePicture');
-          await this.dispatch('SendBarcodeImage');
+          if (counter > 0){
+            console.log("counter: ", counter);
+            await this.dispatch('takePicture');
+            await this.dispatch('SendBarcodeImage');
+
+            Vue.$toast.error(this.state.barcode_data, {
+              timeout: 2000
+            });
+
+
+            counter--
+          } else {
+            break
+          }
         }
       } else {
         console.log("found my data");

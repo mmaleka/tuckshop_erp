@@ -66,24 +66,6 @@ export default {
             this.$store.dispatch('scanBarcode')
         },
 
-
-        // takePicture(){
-        //     console.log("taking pic");
-        //     let ratio = (window.innerHeight < window.innerWidth) ? 16 / 11 : 11 / 16;  
-        //     const picture = document.querySelector("canvas");
-        //     picture.width = (window.innerWidth < 1280) ? window.innerWidth : 1280;
-        //     picture.height = window.innerWidth / ratio;
-        //     const ctx = picture.getContext("2d");
-        //     ctx.imageSmoothingEnabled = true;
-        //     ctx.imageSmoothingQuality = "high";
-        //     ctx.drawImage(document.querySelector("video"), 0, 0, picture.width, picture.height)
-
-        //     const imageFileData = picture.toDataURL('image/jpeg', 1);
-        //     this.$store.dispatch('SendBarcodeImage', { imageFileData })
-        // },
-
-
-
         onCancel() {
             console.log('User cancelled the loader.')
         }
