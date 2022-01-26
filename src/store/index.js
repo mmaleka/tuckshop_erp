@@ -419,12 +419,6 @@ export default new Vuex.Store({
             console.log("counter: ", counter);
             await this.dispatch('takePicture');
             await this.dispatch('SendBarcodeImage');
-
-            Vue.$toast.error(this.state.barcode_data, {
-              timeout: 2000
-            });
-
-
             counter--
           } else {
             break
